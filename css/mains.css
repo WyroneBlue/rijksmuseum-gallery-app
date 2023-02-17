@@ -1,0 +1,263 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+:root{
+    --main-color: pink;
+    --bg-color: var(--main-color);
+    --border-color: blue;
+    --border: 2px solid var(--border-color);
+
+    --skeleton-color: #f2f2f2;
+    --skeleton-loading: #e0e0e0;
+
+    --2-col-grid: repeat(2, 1fr);
+    --3-col-grid: repeat(3, 1fr);
+}
+
+body:has(aside.show),
+body:has(dialog[open]){
+    overflow: hidden;
+}
+
+button{
+    cursor: pointer;
+}
+
+ul{
+    list-style: none;
+}
+
+header, main, aside, footer {
+    position: relative;
+    padding: 20px;
+}
+
+header{
+    position: sticky;
+    top: -60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: white;
+    z-index: 9;
+}
+
+header section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+header section h2::before{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    /* width: 20px; */
+    height: 4px;
+    background-color: green;
+    animation: load_underline .6s 1.2s ease-out forwards;
+}
+
+header section div{
+    display: flex;
+    overflow: hidden;
+    border-radius: 2px;
+    border: var(--border);
+}
+
+header section div::before{
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    background-color: green;
+    transition: all 0.3s ease-out;
+}
+
+header section div:has(input:first-of-type:checked)::before{
+    transform: translateX(0);
+}
+
+header section div:has(input:last-of-type:checked)::before{
+    transform: translateX(100%);
+}
+
+header section div label{
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+header section div input{
+    display: none;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+main ul{
+    display: grid;
+    grid-template-columns: var(--2-col-grid);
+    width: 100%;
+}
+
+body:has(input:last-of-type:checked) main ul{
+    grid-template-columns: var(--3-col-grid);
+}
+
+main ul li{
+    display: grid;
+    background-color: var(--skeleton-color);
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    transform: scale(.5);
+    opacity: 0;
+    cursor: pointer;
+
+    transition: all 0.6s ease-in;
+}
+
+main ul li.skeleton{
+    opacity: 1;
+    transform: scale(1);
+}
+
+main ul li.loaded{
+    transform: scale(1);
+    opacity: 1;
+}
+
+main ul li.skeleton::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    display: grid;
+    place-content: center;
+    width: 30px;
+    height: 400px;
+    background-color: var(--skeleton-loading);
+    filter: blur(20px);
+    animation: skeleton 2s infinite ease-in;
+}
+
+main ul li img{
+    grid-row: 1/-1;
+    grid-column: 1/-1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    transform: scale(1.1);
+    transition: all 0.6s ease-in;
+    /* image-rendering: pixelated; */
+}
+
+main ul li:hover img{
+    transform: scale(1);
+    filter: brightness(0.8)
+}
+
+main ul li h3{
+    grid-row: 1/-1;
+    grid-column: 1/-1;
+    place-self: center;
+    padding: 0 20px;
+    opacity: 0;
+    z-index: 4;
+    transition: all 0.6s ease-in;
+    color: white;
+    filter: drop-shadow(0 0 10px black);
+}
+
+main ul li:hover h3{
+    opacity: 1;
+}
+
+main span{
+    display: grid;
+    place-content: center;
+    height: 30px;
+}
+
+footer button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 11;
+}
+
+aside{
+    position: fixed;
+    bottom: 0;
+    inset-inline: 0;
+    height: 90vh;
+    background-color: var(--bg-color);
+    z-index: 10;
+    transform: translateY(100%);
+    transition: all 0.5s ease-in-out;
+}
+
+aside.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+aside section{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+dialog[open]{
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    padding: 20px;
+}
+
+dialog[open]::backdrop {
+    background: rgba(0, 0, 0, .8);
+}
+
+dialog[open] section{
+    width: 80vw;
+    height: 80vh;
+}
+
+@keyframes skeleton {
+    0%{
+        transform: translate(-300px, -200px);
+        rotate: 45deg;
+    }
+    40%{
+        transform: translate(-300px, -200px);
+    }
+    100%{
+        transform: translate(calc(200% + 300px), -200px);
+        rotate: 45deg;
+    }
+}
+
+@keyframes load_underline{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 20px;
+    }
+}

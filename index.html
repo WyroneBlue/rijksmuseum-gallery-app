@@ -5,16 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rijksmuseum Gallery App</title>
+    <link rel="stylesheet" href="./css/mains.css">
 </head>
 <body>
     <header>
-
+        <h1>RGA</h1>
+        <section>
+            <h2>Explore</h2>
+            <div>
+                <input type="radio" name="layout" id="col-2" checked>
+                <label for="col-2">2 Cols</label>
+                <input type="radio" name="layout" id="col-3">
+                <label for="col-3">3 Cols</label>
+            </div>
+        </section>
     </header>
+
     <main>
-
+        <ul>
+            <li class="skeleton"></li>
+            <li class="skeleton"></li>
+            <li class="skeleton"></li>
+            <li class="skeleton"></li>
+            <li class="skeleton"></li>
+            <li class="skeleton"></li>
+        </ul>
+        <span></span>
     </main>
-    <footer>
 
+    <aside>
+        <section>
+            <h2>Filters</h2>
+            <button>X</button>
+        </section>
+
+        <div>
+            <label for="search">Search</label>
+            <input type="search" id="search">
+        </div>
+
+        <fieldset>
+            <legend>Options</legend>
+            <!-- <label for="options">Options</label> -->
+
+            <input type="checkbox" name="options" value="Cats">Cats<br>
+            <input type="checkbox" name="options" value="Dogs">Dogs<br>
+            <input type="checkbox" name="options" value="Birds">Birds<br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Sort By</legend>
+            <!-- <label for="options">Sort By</label> -->
+
+            <input type="radio" name="sort" value="Cats">Cats<br>
+            <input type="radio" name="sort" value="Dogs">Dogs<br>
+            <input type="radio" name="sort" value="Birds">Birds<br>
+        </fieldset>
+    </aside>
+
+    <footer>
+        <button>
+            filter
+        </button>
     </footer>
+
+    <dialog>
+        <h2>test</h2>
+        <section>
+        </section>
+    </dialog>
+    <script src="./js/main.js"></script>
 </body>
 </html>
