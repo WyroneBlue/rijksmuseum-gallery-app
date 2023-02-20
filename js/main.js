@@ -8,7 +8,7 @@ const filters = $('aside');
 
 filterButton.addEventListener('click', toggleFilters);
 
-function toggleFilters (){
+export function toggleFilters (){
     filters.classList.toggle('show');
 }
 
