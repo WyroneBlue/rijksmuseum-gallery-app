@@ -23,6 +23,11 @@ body:has(dialog[open]){
     overflow: hidden;
 }
 
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
 button{
     cursor: pointer;
 }
@@ -100,6 +105,12 @@ header section div input{
 main{
     display: flex;
     flex-direction: column;
+    transition: all 0.6s ease-in-out;
+}
+
+main.loading{
+    opacity: 0;
+    transform: scale(.95);
 }
 
 main ul{
@@ -114,12 +125,11 @@ body:has(input:last-of-type:checked) main ul{
 
 main ul li{
     display: grid;
-    background-color: var(--skeleton-color);
     aspect-ratio: 1/1;
     overflow: hidden;
     transform: scale(.5);
     opacity: 0;
-    cursor: pointer;
+    background-color: var(--skeleton-color);
 
     transition: all 0.6s ease-in;
 }
@@ -147,7 +157,12 @@ main ul li.skeleton::before{
     animation: skeleton 2s infinite ease-in;
 }
 
-main ul li img{
+main ul li a{
+    display: grid;
+    aspect-ratio: 1/1;
+}
+
+main ul li a img{
     grid-row: 1/-1;
     grid-column: 1/-1;
     width: 100%;
@@ -159,12 +174,12 @@ main ul li img{
     /* image-rendering: pixelated; */
 }
 
-main ul li:hover img{
+main ul li:hover a img{
     transform: scale(1);
     filter: brightness(0.8)
 }
 
-main ul li h3{
+main ul li a h3{
     grid-row: 1/-1;
     grid-column: 1/-1;
     place-self: center;
@@ -176,7 +191,30 @@ main ul li h3{
     filter: drop-shadow(0 0 10px black);
 }
 
-main ul li:hover h3{
+main ul li:hover a h3{
+    opacity: 1;
+}
+
+main ul li section{
+    position: absolute;
+    inset-block: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+main ul li section button{
+    opacity: 0;
+    padding: 5px 10px;
+    border-radius: 2px;
+    transition: .6s ease-in;
+
+    z-index: 99;
+}
+
+main ul li:hover section button{
     opacity: 1;
 }
 
@@ -201,7 +239,7 @@ aside{
     position: fixed;
     bottom: 0;
     inset-inline: 0;
-    height: 90vh;
+    height: 91vh;
     background-color: var(--bg-color);
     z-index: 10;
     transform: translateY(100%);
@@ -222,9 +260,10 @@ aside section{
 dialog[open]{
     position: fixed;
     inset: 0;
-    display: grid;
-    place-content: center;
-    max-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
     max-height: none;
     margin: auto;
     padding: 20px;
@@ -234,9 +273,25 @@ dialog[open]::backdrop {
     background: rgba(0, 0, 0, .8);
 }
 
-dialog[open] section{
-    width: 80vw;
-    height: 80vh;
+dialog[open] div{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+dialog[open] div a{
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+dialog[open] div a:first-of-type{
+    border: 2px solid purple;
+}
+
+dialog[open] div a:last-of-type{
+    color: white;
+    font-weight: 700;
+    background-color: purple;
 }
 
 @keyframes skeleton {
