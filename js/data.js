@@ -8,4 +8,5 @@ const baseWithKey = `${base}?key=${apiKey}`;
 const itemCount = 20;
 
 export const fetchItems = async (page) => await get(`${baseWithKey}&ps=${itemCount}&p=${page}`);
-export const fetchDetails = async (id) => await get(`${base}/${id}?key=${apiKey}&ps=1`);
+export const searchItems = async (page, search, sort, top) => await get(`${baseWithKey}&p=${page}&ps=${itemCount}&q=${search}&s=${sort}&toppieces=${top}`);
+export const fetchDetails = async (id) => await get(`${base}/${id}?key=${apiKey}`);
