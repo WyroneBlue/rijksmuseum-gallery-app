@@ -17,9 +17,9 @@
         <section>
             <h2>Explore</h2>
             <div>
-                <input type="radio" name="layout" id="col-2" checked>
+                <input type="radio" name="layout" id="col-2">
                 <label for="col-2">2 Cols</label>
-                <input type="radio" name="layout" id="col-3">
+                <input type="radio" name="layout" id="col-3" checked>
                 <label for="col-3">3 Cols</label>
             </div>
         </section>
@@ -27,39 +27,65 @@
 
     <main></main>
 
+    <!-- <aside class="show"> -->
     <aside>
         <section>
             <h2>Filters</h2>
             <button>X</button>
         </section>
 
-        <div>
-            <label for="search">Search</label>
-            <input type="search" id="search">
-        </div>
+        <form>
+            <label>
+                Search
+                <input type="search" placeholder="Search collection for art or artist....">
+            </label>
 
-        <fieldset>
-            <legend>Options</legend>
-            <!-- <label for="options">Options</label> -->
+            <fieldset>
+                <legend>Sort By</legend>
+                <label>
+                    Relevance
+                    <input type="radio" name="sort" value="relevance" checked>
+                </label>
+                <label>
+                    Type
+                    <input type="radio" name="sort" value="objecttype">
+                </label>
 
-            <input type="checkbox" name="options" value="Cats">Cats<br>
-            <input type="checkbox" name="options" value="Dogs">Dogs<br>
-            <input type="checkbox" name="options" value="Birds">Birds<br>
-        </fieldset>
+                <label>
+                    Oldest first
+                    <input type="radio" name="sort" value="chronologic">
+                </label>
 
-        <fieldset>
-            <legend>Sort By</legend>
-            <!-- <label for="options">Sort By</label> -->
+                <label>
+                    Newest first
+                    <input type="radio" name="sort" value="achronologic">
+                </label>
 
-            <input type="radio" name="sort" value="Cats">Cats<br>
-            <input type="radio" name="sort" value="Dogs">Dogs<br>
-            <input type="radio" name="sort" value="Birds">Birds<br>
-        </fieldset>
+                <label>
+                    Artist a-z
+                    <input type="radio" name="sort" value="artist">
+                </label>
+
+                <label>
+                    Artist z-a
+                    <input type="radio" name="sort" value="artistdesc">
+                </label>
+            </fieldset>
+
+            <label>
+                Top pieces only
+                <input type="checkbox" name="top-piece" checked>
+            </label>
+
+            <button>
+                Search art
+            </button>
+        </form>
     </aside>
 
     <footer>
         <button>
-            filter
+            🔎
         </button>
     </footer>
 
