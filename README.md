@@ -32,3 +32,17 @@ De technieken die ik wil gaan gebruiken zijn:
 - local storage: Voor het opslaan van de favorieten(Als er tijd over is)
 
 ### Schetsen
+
+<img src="./docs/images/schets-1.jpg" alt="Schetsen 1"/>
+<img src="./docs/images/schets-2.jpg" alt="Schetsen 2" style="transform:rotate(-90deg);"/>
+
+### Peer review
+Bij de eerste testen van mijn web applicatie heb ik wat feedback gekregen van mijn mede studenten.
+
+De feedback die ik heb gekregen van Danien:
+- Comments toevoegen in de code, zodat ik weet waar ik mee bezig was
+- Pixels proberen te vermijden in plaats daarvan Ems en Rems of viewport units
+
+De feedback die ik heb gekregen van Laurens:
+- De custom properties kunnnen consistenter toegpast worden
+- Kijken of ik de lazyloading iets beter kan toepassen en of dit mijn applicatie niet breekt
