@@ -1,7 +1,9 @@
 import { $ } from './helpers.js';
-import { fetchItems } from './data.js';
+import { fetchItems, searchItems } from './data.js';
+import { toggleFilters } from './main.js';
 
 const main = $('main');
+const form = $('aside form');
 const dialog = $('dialog');
 
 let page = 1;
@@ -15,7 +17,7 @@ export const loadHome = async () => {
     const showDetails = (e, item) => {
         console.dir(dialog);
         dialog.innerHTML = `
-            <a href="#home">Back to home</a>
+            <a href="#home">Close</a>
 
             <section>
                 <h1>${item.title}</h1>
@@ -62,12 +64,14 @@ export const loadHome = async () => {
 
         items.forEach(item => {
 
-            const lowerImage = item.webImage.url.replace('s=0', 's=1000');
+            const img = item.webImage ? item.webImage.url : 'https://via.placeholder.com/300x300';
+            const alt = item.webImage ? item.title : `${item.title} Only available in the Rijksmuseum`;
+
             const li = `
             <li>
                 <a href="#details/${item.objectNumber}">
                     <h3>${item.title}</h3>
-                    <img data-src="${lowerImage}" alt="${item.title}">
+                    <img data-src="${img}" alt="${alt}">
                 </a>
                 <section>
                     <button>(+)</button>
@@ -87,14 +91,18 @@ export const loadHome = async () => {
             const imageObserver = new IntersectionObserver((entries, observer) => {
 
                 entries.forEach(entry => {
+                    const image = entry.target;
                     if (entry.isIntersecting) {
-                        const image = entry.target;
                         image.src = image.dataset.src;
                         image.onload = () => {
                             image.removeAttribute('data-src')
                             image.parentElement.parentElement.classList.add('loaded');
                         }
-                        observer.unobserve(image);
+                        // observer.unobserve(image);
+                    } else {
+                        image.parentElement.parentElement.classList.remove('loaded');
+                        image.dataset.src = img;
+                        image.src = '';
                     }
                 });
             }, imageOptions);
@@ -144,14 +152,28 @@ export const loadHome = async () => {
         main.innerHTML = html;
     }
 
+    function closeDialog () {
+        dialog.close();
+        dialog.innerHTML = '';
+    }
+
     window.addEventListener('click', (e) => {
         if (e.target === dialog && dialog.open) {
             closeDialog();
         }
     });
 
-    function closeDialog () {
-        dialog.close();
-        dialog.innerHTML = '';
-    }
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const search = form.querySelector('label:first-of-type input').value;
+        const sort = form.querySelector('fieldset input:checked').value;
+        const top = form.querySelector('label:last-of-type input[name="top-piece"]').checked;
+
+        toggleFilters();
+
+        const { artObjects: items } = await searchItems(page, search, sort, top);
+        console.log(items);
+        renderHTML(items, true);
+    });
+
 }
