@@ -46,3 +46,7 @@ De feedback die ik heb gekregen van Danien:
 De feedback die ik heb gekregen van Laurens:
 - De custom properties kunnnen consistenter toegpast worden
 - Kijken of ik de lazyloading iets beter kan toepassen en of dit mijn applicatie niet breekt
+
+
+
+## Week 3: Design & refactor
