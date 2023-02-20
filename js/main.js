@@ -10,7 +10,6 @@ const resultsContainer = document.querySelector('main > ul');
 const moreresultsSection = document.querySelector('main > span');
 
 const dialog = document.querySelector('dialog');
-console.dir(dialog);
 
 let itemCount = 20;
 let page = 1;
@@ -107,6 +106,11 @@ window.addEventListener('load', async () => {
 });
 
 
+window.addEventListener('click', (e) => {
+    if(e.target === dialog && dialog.open){
+        dialog.close();
+    }
+});
 
 function toggleFilters (){
     filters.classList.toggle('show');
