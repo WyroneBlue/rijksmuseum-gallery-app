@@ -84,9 +84,9 @@ export const loadHome = async () => {
 
             const lastItem = resultsContainer.lastElementChild;
             const observerImage = lastItem.querySelector('img');
-            const imageOptions = {
-                threshold: 0.2
-            }
+            // const imageOptions = {
+            //     threshold: 0.2
+            // }
 
             const imageObserver = new IntersectionObserver((entries, observer) => {
 
@@ -105,7 +105,8 @@ export const loadHome = async () => {
                         image.src = '';
                     }
                 });
-            }, imageOptions);
+            });
+            // , imageOptions);
             imageObserver.observe(observerImage);
 
             const saveButton = lastItem.querySelector('button:first-of-type');
@@ -115,10 +116,10 @@ export const loadHome = async () => {
             infoButton.addEventListener('click', (e) => showDetails(e, item));
         });
 
-        let moreResultsOptions = {
-            rootMargin: '0px 0px -50px 0px',
-            threshold: 1
-        }
+        // let moreResultsOptions = {
+        //     rootMargin: '0px 0px -50px 0px',
+        //     threshold: 1
+        // }
 
         const moreResultsObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(async entry => {
@@ -132,7 +133,8 @@ export const loadHome = async () => {
                     }
                 }
             });
-        }, moreResultsOptions);
+        });
+        // , moreResultsOptions);
 
         moreResultsObserver.observe(moreresultsSection);
     }
