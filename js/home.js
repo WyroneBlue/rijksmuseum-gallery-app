@@ -16,7 +16,9 @@ export const loadHome = async () => {
 
     const showDetails = (e, item) => {
         dialog.innerHTML = `
-            <a href="#home">Close</a>
+            <form method="dialog">
+                <button type="submit">Close</button>
+            </form>
 
             <section>
                 <h1>${item.title}</h1>
