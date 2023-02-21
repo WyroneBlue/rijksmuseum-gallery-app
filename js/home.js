@@ -44,6 +44,7 @@ export const loadHome = async () => {
     renderSkeleton();
 
     const { artObjects: items } = await fetchItems(page);
+    const moreresultsSection = $('main > span');
 
     // setTimeout(() => {
     renderHTML(items, true);
@@ -52,7 +53,6 @@ export const loadHome = async () => {
 
     function renderHTML (items, fresh = false) {
         const resultsContainer = $('main > ul');
-        const moreresultsSection = $('main > span');
         if (fresh) {
             resultsContainer.innerHTML = '';
         }
@@ -84,9 +84,9 @@ export const loadHome = async () => {
 
             const lastItem = resultsContainer.lastElementChild;
             const observerImage = lastItem.querySelector('img');
-            // const imageOptions = {
-            //     threshold: 0.2
-            // }
+            const imageOptions = {
+                rootMargin: '0px 0px 200px 0px',
+            }
 
             const imageObserver = new IntersectionObserver((entries, observer) => {
 
@@ -105,8 +105,7 @@ export const loadHome = async () => {
                         image.src = '';
                     }
                 });
-            });
-            // , imageOptions);
+            }, imageOptions);
             imageObserver.observe(observerImage);
 
             const saveButton = lastItem.querySelector('button:first-of-type');
@@ -115,30 +114,25 @@ export const loadHome = async () => {
             saveButton.addEventListener('click', (e) => saveFavorite(e, item));
             infoButton.addEventListener('click', (e) => showDetails(e, item));
         });
-
-        // let moreResultsOptions = {
-        //     rootMargin: '0px 0px -50px 0px',
-        //     threshold: 1
-        // }
-
-        const moreResultsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(async entry => {
-                if (entry.isIntersecting) {
-                    console.log('more results');
-                    if (!initialLoad) {
-
-                        page++;
-                        const { artObjects: items } = await fetchItems(page);
-                        renderHTML(items);
-                    }
-                }
-            });
-        });
-        // , moreResultsOptions);
-
-        moreResultsObserver.observe(moreresultsSection);
     }
 
+    let moreResultsOptions = {
+        rootMargin: '0px 0px 300px 0px',
+    }
+
+    const moreResultsObserver = new IntersectionObserver(async (entries, observer) => {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
+            console.log(entry);
+            console.log('more results');
+            if (!initialLoad) {
+                page++;
+                const { artObjects: items } = await fetchItems(page);
+                renderHTML(items);
+            }
+        }
+    }, moreResultsOptions);
+    moreResultsObserver.observe(moreresultsSection);
 
     function renderSkeleton () {
         let html = '<ul>';
