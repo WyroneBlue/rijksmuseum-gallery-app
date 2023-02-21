@@ -169,11 +169,12 @@ export const loadHome = async () => {
         e.preventDefault();
         const search = form.querySelector('label:first-of-type input').value;
         const sort = form.querySelector('fieldset input:checked').value;
-        const top = form.querySelector('label:last-of-type input[name="top-piece"]').checked;
+        const topPiece = form.querySelector('label:last-of-type input[name="top-piece"]').checked;
+        const imageOnly = form.querySelector('label:last-of-type input[name="image-only"]').checked;
 
         toggleFilters();
 
-        const { artObjects: items } = await searchItems(page, search, sort, top);
+        const { artObjects: items } = await searchItems(page, search, sort, topPiece, imageOnly);
         console.log(items);
         renderHTML(items, true);
     });
