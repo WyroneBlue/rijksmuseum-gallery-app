@@ -163,8 +163,8 @@ export const loadHome = async () => {
         e.preventDefault();
         const search = form.querySelector('label:first-of-type input').value;
         const sort = form.querySelector('fieldset input:checked').value;
-        const topPiece = form.querySelector('label:last-of-type input[name="top-piece"]').checked;
-        const imageOnly = form.querySelector('label:last-of-type input[name="image-only"]').checked;
+        const topPiece = form.querySelector('fieldset label:first-of-type input[name="top-piece"]').checked;
+        const imageOnly = form.querySelector('fieldset label:last-of-type input[name="image-only"]').checked;
 
         toggleFilters();
 
