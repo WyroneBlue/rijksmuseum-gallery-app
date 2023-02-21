@@ -127,11 +127,11 @@ main ul li{
     display: grid;
     aspect-ratio: 1/1;
     overflow: hidden;
-    transform: scale(.5);
+    transform: scale(.8);
     opacity: 0;
     background-color: var(--skeleton-color);
 
-    transition: all 0.6s ease-in;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-in;
 }
 
 main ul li.skeleton{
