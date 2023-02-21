@@ -1,5 +1,5 @@
 import { $ } from './helpers.js';
-import { fetchItems, searchItems } from './data.js';
+import { fetchItems, searchItems, fetchDetailImages } from './data.js';
 import { toggleFilters } from './main.js';
 
 const main = $('main');
@@ -62,20 +62,24 @@ export const loadHome = async () => {
             return;
         }
 
-        items.forEach(item => {
+        items.forEach(async item => {
 
-            const img = item.webImage ? item.webImage.url : 'https://via.placeholder.com/300x300';
-            const alt = item.webImage ? item.title : `${item.title} Only available in the Rijksmuseum`;
+            const { levels } = await fetchDetailImages(item.objectNumber);
+            const {tiles} = levels.filter(image => image.name === "z4")[0];
+            const lowestImage = tiles[0].url;
+
+            const img = lowestImage ? lowestImage : 'https://via.placeholder.com/300x300';
+            const alt = lowestImage ? item.title : `${item.title} Only available in the Rijksmuseum`;
 
             const li = `
             <li>
                 <a href="#details/${item.objectNumber}">
                     <h3>${item.title}</h3>
-                    <img data-src="${img}" alt="${alt}">
+                    <img data-src="${lowestImage}" alt="${alt}">
                 </a>
                 <section>
-                    <button>(+)</button>
-                    <button>(i)</button>
+                    <button>❤️</button>
+                    <button>ℹ️</button>
                 </section>
             </li>
             `;
