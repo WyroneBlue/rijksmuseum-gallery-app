@@ -16,12 +16,15 @@ export const loadHome = async () => {
 
     const showDetails = (e, item) => {
         dialog.innerHTML = `
-            <form method="dialog">
-                <button type="submit">Close</button>
-            </form>
+            <div>
+                <h1>Extra info</h1>
+                <form method="dialog">
+                    <button type="submit">❌</button>
+                </form>
+            </div>
 
             <section>
-                <h1>${item.title}</h1>
+                <h2>${item.title}</h2>
                 <p>${item.longTitle}</p>
             </section>
 

@@ -25,6 +25,8 @@
 
 body {
     font-family: 'MuseoModerno', sans-serif;
+    max-width: 600px;
+    margin-inline: auto;
 }
 
 body:has(aside.show),
@@ -61,6 +63,10 @@ header{
     z-index: 9;
 }
 
+header h1{
+    line-height: 1.7rem;
+}
+
 header section{
     display: flex;
     justify-content: space-between;
@@ -78,14 +84,15 @@ header section h2::before{
     animation: load_underline .6s 1.2s ease-out forwards;
 }
 
-header section div{
-    display: flex;
+header section > div{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     overflow: hidden;
     border-radius: 2px;
     border: var(--border);
 }
 
-header section div::before{
+header section > div::before{
     content: "";
     position: absolute;
     inset-block: 0;
@@ -94,17 +101,40 @@ header section div::before{
     transition: all 0.3s ease-out;
 }
 
-header section div:has(input:first-of-type:checked)::before{
+header section > div:has(input:first-of-type:checked)::before{
     transform: translateX(0);
 }
 
-header section div:has(input:last-of-type:checked)::before{
+header section > div:has(input:last-of-type:checked)::before{
     transform: translateX(100%);
 }
 
-header section div label{
+header section > div label{
+    display: grid;
+    place-content: center;
+}
+
+header section > div label div{
+    display: grid;
+    gap: 2px;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+header section > div label:first-of-type div{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+header section > div label:last-of-type div{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+header section > div label div span{
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 2px;
 }
 
 header section div input{
@@ -147,6 +177,8 @@ main ul li.skeleton{
     opacity: 1;
     transform: scale(1);
 }
+
+/* dark images for not hovered? */
 
 main ul li.loaded{
     transform: scale(1);
@@ -211,15 +243,16 @@ main ul li section{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 5px;
 }
 
 main ul li section button{
+    padding: 5px;
+    background: white;
+    border-radius: 50%;
     opacity: 0;
-    padding: 5px 10px;
-    border-radius: 2px;
+    aspect-ratio: 1/1;
     transition: .6s ease-in;
-
     z-index: 99;
 }
 
@@ -251,7 +284,12 @@ aside{
     flex-direction: column;
     gap: 16px;
     height: 91vh;
-    background-color: var(--bg-color);
+    /* background-color: rgba(0, 0, 0, .8); */
+    /* background-color: transparent; */
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(33,31,31,.5) 0%,rgba(33,31,31,1) 2%, rgba(255,255,255,0) 100%);
+    color: white;
+
     z-index: 10;
     transform: translateY(100%);
     transition: all 0.5s ease-in-out;
@@ -262,15 +300,28 @@ aside.show{
     transform: translateY(0);
 }
 
+body:has(aside.show) main{
+/* body:has(aside.show) main,
+body:has(aside.show) header{ */
+    filter: blur(20px);
+}
+
 aside section{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+aside section button{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 aside form{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 aside form > label:first-of-type{
@@ -327,15 +378,27 @@ dialog[open]::backdrop {
     background: rgba(0, 0, 0, .8);
 }
 
+dialog[open] form{
+    align-self: end;
+}
+
+dialog[open] form button{
+    height: 50px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background-color: white;
+}
+
 dialog[open] div{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 10px;
     width: 100%;
 }
 
 dialog[open] div a{
     padding: 10px 20px;
-    border-radius: 20px;
 }
 
 dialog[open] div a:first-of-type{
