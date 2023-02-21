@@ -292,14 +292,6 @@ aside form fieldset label{
     border-radius: 50px;
 }
 
-aside form > label:last-of-type{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-direction: row-reverse;
-    align-self: start;
-}
-
 aside form fieldset label:has(input:checked){
     background-color: purple;
 }
