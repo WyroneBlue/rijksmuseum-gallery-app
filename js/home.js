@@ -15,7 +15,6 @@ export const loadHome = async () => {
     }
 
     const showDetails = (e, item) => {
-        console.dir(dialog);
         dialog.innerHTML = `
             <a href="#home">Close</a>
 
@@ -35,7 +34,6 @@ export const loadHome = async () => {
         const detailButton = dialog.querySelector('a:last-of-type');
         detailButton.addEventListener('click', () => {
             closeDialog();
-            console.log('details and close');
         });
 
         dialog.showModal();
