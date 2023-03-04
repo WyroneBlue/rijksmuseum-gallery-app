@@ -173,8 +173,8 @@ main.page-transition{
 
 main.loading{
     position: absolute;
-    inset: 0;
-    width: 100vw;
+    inset-inline: 0;
+    top: 0;
     height: 100vh;
     display: grid;
     place-content: center;
