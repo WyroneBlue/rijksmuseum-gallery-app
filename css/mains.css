@@ -21,11 +21,13 @@
 
     --2-col-grid: repeat(2, 1fr);
     --3-col-grid: repeat(3, 1fr);
+
+    --container-padding: 20px;
 }
 
 body {
     font-family: 'MuseoModerno', sans-serif;
-    max-width: 600px;
+    max-width: 960px;
     margin-inline: auto;
 }
 
@@ -47,9 +49,9 @@ ul{
     list-style: none;
 }
 
-header, main, aside, footer {
+header, main, aside, footer, dialog {
     position: relative;
-    padding: 20px;
+    padding: var(--container-padding);
 }
 
 header{
@@ -74,14 +76,26 @@ header section{
     width: 100%;
 }
 
+body:not(#home) header section{
+    display: none;
+}
+
 header section h2::before{
     content: "";
     position: absolute;
     bottom: -4px;
-    /* width: 20px; */
     height: 4px;
     background-color: green;
     animation: load_underline .6s 1.2s ease-out forwards;
+}
+
+@keyframes load_underline{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 20px;
+    }
 }
 
 header section > div{
@@ -147,22 +161,52 @@ main{
     transition: all 0.6s ease-in-out;
 }
 
-main.loading{
+main.page-transition{
     opacity: 0;
     transform: scale(.95);
 }
 
-main ul{
+main.loading{
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+main.loading h1::before{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    width: 50%;
+    height: 4px;
+    background-color: green;
+    animation: page-loader .5s ease-out infinite alternate;
+}
+
+@keyframes page-loader{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(150%);
+    }
+}
+
+main ul,
+aside ul{
     display: grid;
     grid-template-columns: var(--2-col-grid);
     width: 100%;
 }
 
-body:has(div input:last-of-type:checked) main ul{
+body:has(header div input:last-of-type:checked) main ul{
     grid-template-columns: var(--3-col-grid);
 }
 
-main ul li{
+main ul li,
+aside ul li{
     display: grid;
     aspect-ratio: 1/1;
     overflow: hidden;
@@ -173,19 +217,22 @@ main ul li{
     transition: transform 0.6s ease-out, opacity 0.6s ease-in;
 }
 
-main ul li.skeleton{
+main ul li.skeleton,
+aside ul li.skeleton{
     opacity: 1;
     transform: scale(1);
 }
 
 /* dark images for not hovered? */
 
-main ul li.loaded{
+main ul li.loaded,
+aside ul li.loaded{
     transform: scale(1);
     opacity: 1;
 }
 
-main ul li.skeleton::before{
+main ul li.skeleton::before,
+aside ul li.skeleton::before{
     content: "";
     position: absolute;
     top: 50%;
@@ -198,12 +245,29 @@ main ul li.skeleton::before{
     animation: skeleton 2s infinite ease-in;
 }
 
-main ul li a{
+@keyframes skeleton {
+    0%{
+        transform: translate(-300px, -200px);
+        rotate: 45deg;
+    }
+    40%{
+        transform: translate(-300px, -200px);
+    }
+    100%{
+        transform: translate(calc(200% + 300px), -200px);
+        rotate: 45deg;
+    }
+}
+
+
+main ul li a,
+aside ul li a{
     display: grid;
     aspect-ratio: 1/1;
 }
 
-main ul li a img{
+main ul li a img,
+aside ul li a img{
     grid-row: 1/-1;
     grid-column: 1/-1;
     width: 100%;
@@ -212,19 +276,20 @@ main ul li a img{
     aspect-ratio: 1/1;
     transform: scale(1.1);
     transition: all 0.6s ease-in;
-    /* image-rendering: pixelated; */
 }
 
-main ul li:hover a img{
+main ul li:hover a img,
+aside ul li:hover a img{
     transform: scale(1);
     filter: brightness(0.8)
 }
 
-main ul li a h3{
+main ul li a h3,
+aside ul li a h3{
     grid-row: 1/-1;
     grid-column: 1/-1;
     place-self: center;
-    padding: 0 20px;
+    padding: 0 var(--container-padding);
     opacity: 0;
     z-index: 4;
     transition: all 0.6s ease-in;
@@ -232,21 +297,24 @@ main ul li a h3{
     filter: drop-shadow(0 0 10px black);
 }
 
-main ul li:hover a h3{
+main ul li:hover a h3,
+aside ul li:hover a h3{
     opacity: 1;
 }
 
-main ul li section{
+main ul li section,
+aside ul li section{
     position: absolute;
     inset-block: 0;
     right: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 5px;
+    padding: 10px;
 }
 
-main ul li section button{
+main ul li section button,
+aside ul li section button{
     padding: 5px;
     background: white;
     border-radius: 50%;
@@ -256,7 +324,43 @@ main ul li section button{
     z-index: 99;
 }
 
-main ul li:hover section button{
+main button.saved{
+    animation: saved .6s ease-in;
+}
+
+@keyframes saved{
+    0%{
+        transform: translateY(0);
+    }
+    25%{
+        transform: translateY(-5px);
+    }
+    50%{
+        transform: translateY(20px) rotateY(0);
+    }
+    100%{
+        transform: translateY(0) rotateY(360deg);
+    }
+}
+
+main button.removed{
+    animation: removed .3s ease-in;
+}
+
+@keyframes removed{
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: scale(.8);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+main ul li:hover section button,
+aside ul li:hover section button{
     opacity: 1;
 }
 
@@ -266,14 +370,20 @@ main span{
     height: 30px;
 }
 
-footer button {
+footer section {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 11;
+}
+
+footer button {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    z-index: 11;
 }
 
 aside{
@@ -284,35 +394,62 @@ aside{
     flex-direction: column;
     gap: 16px;
     height: 91vh;
-    /* background-color: rgba(0, 0, 0, .8); */
-    /* background-color: transparent; */
-    background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(33,31,31,.5) 0%,rgba(33,31,31,1) 2%, rgba(255,255,255,0) 100%);
+    padding: var(--container-padding);
+    background: linear-gradient(180deg, rgba(33, 31, 31, .5) 0%, rgba(33, 31, 31, 1) 2%,  rgba(255, 255, 255, .8) 100%);
     color: white;
+    opacity: 0;
+    transform: translateY(100%);
 
     z-index: 10;
-    transform: translateY(100%);
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out .3s;
 }
 
-aside.show{
+aside div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+}
+
+aside[aria-label="favorites"] ul{
+    display: grid;
+    grid-template-columns: var(--2-col-grid);
+    gap: 10px;
+}
+
+aside[aria-label="favorites"] ul li{
+    display: flex;
+    flex-direction: column;
+}
+
+aside[aria-label="favorites"].show,
+aside[aria-label="filters"].show{
     opacity: 1;
     transform: translateY(0);
+    overflow-y: auto;
 }
 
 body:has(aside.show) main{
-/* body:has(aside.show) main,
-body:has(aside.show) header{ */
     filter: blur(20px);
+    pointer-events: none;
 }
 
-aside section{
+aside > div > section{
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(0, 128, 0, 0.95);
+    overflow-x: auto;
+    z-index: 1;
 }
 
-aside section button{
+aside > div > section > button{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -371,7 +508,6 @@ dialog[open]{
     max-width: 500px;
     max-height: none;
     margin: auto;
-    padding: 20px;
 }
 
 dialog[open]::backdrop {
@@ -411,25 +547,34 @@ dialog[open] div a:last-of-type{
     background-color: purple;
 }
 
-@keyframes skeleton {
-    0%{
-        transform: translate(-300px, -200px);
-        rotate: 45deg;
-    }
-    40%{
-        transform: translate(-300px, -200px);
-    }
-    100%{
-        transform: translate(calc(200% + 300px), -200px);
-        rotate: 45deg;
-    }
+body#details main section{
+    max-width: 600px;
+    margin-inline: auto;
 }
 
-@keyframes load_underline{
-    0%{
-        width: 0;
-    }
-    100%{
-        width: 20px;
-    }
+body#details main section a{
+    display: block;
+    width: fit-content;
+}
+
+body#details main article{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+body#details main article img{
+    width: 100%;
+    max-height: 600px;
+}
+
+body#details main article button{
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }

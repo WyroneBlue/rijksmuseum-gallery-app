@@ -26,7 +26,7 @@
                         <span></span>
                     </div>
                 </label>
-                <input type="radio" name="layout" id="col-3" checked>
+                <input type="radio" name="layout" id="col-3">
                 <label for="col-3">
                     <div>
                         <span></span>
@@ -41,76 +41,86 @@
         </section>
     </header>
 
-    <main></main>
+    <main>
+        <ul></ul>
+    </main>
 
-    <!-- <aside class="show"> -->
-    <aside>
-        <section>
-            <h2>Filters</h2>
-            <button>❌</button>
-        </section>
 
-        <form>
-            <label>
-                Search
-                <input type="search" placeholder="Search collection for art or artist....">
-            </label>
-
-            <fieldset>
-                <legend>Sort By</legend>
+    <aside aria-label="favorites">
+        <div>
+            <section>
+                <h2>Favorites(<span></span>)</h2>
+                <button>❌</button>
+            </section>
+            <ul></ul>
+        </div>
+    </aside>
+    <aside aria-label="filters">
+        <div>
+            <section>
+                <h2>Filters</h2>
+                <button>❌</button>
+            </section>
+            <form>
                 <label>
-                    Relevance
-                    <input type="radio" name="sort" value="relevance" checked>
+                    Search
+                    <input type="search" placeholder="Search collection for art or artist....">
                 </label>
-                <label>
-                    Type
-                    <input type="radio" name="sort" value="objecttype">
-                </label>
-
-                <label>
-                    Oldest first
-                    <input type="radio" name="sort" value="chronologic">
-                </label>
-
-                <label>
-                    Newest first
-                    <input type="radio" name="sort" value="achronologic">
-                </label>
-
-                <label>
-                    Artist a-z
-                    <input type="radio" name="sort" value="artist">
-                </label>
-
-                <label>
-                    Artist z-a
-                    <input type="radio" name="sort" value="artistdesc">
-                </label>
-            </fieldset>
-
-            <fieldset>
-                <legend>Extra options</legend>
-                <label>
-                    Top pieces only
-                    <input type="checkbox" name="top-piece" checked>
-                </label>
-
-                <label>
-                    With image only
-                    <input type="checkbox" name="image-only" checked>
-                </label>
-            </fieldset>
-
-            <button>
-                Search art
-            </button>
-        </form>
+                <fieldset>
+                    <legend>Sort By</legend>
+                    <label>
+                        Relevance
+                        <input type="radio" name="sort" value="relevance" checked>
+                    </label>
+                    <label>
+                        Type
+                        <input type="radio" name="sort" value="objecttype">
+                    </label>
+                    <label>
+                        Oldest first
+                        <input type="radio" name="sort" value="chronologic">
+                    </label>
+                    <label>
+                        Newest first
+                        <input type="radio" name="sort" value="achronologic">
+                    </label>
+                    <label>
+                        Artist a-z
+                        <input type="radio" name="sort" value="artist">
+                    </label>
+                    <label>
+                        Artist z-a
+                        <input type="radio" name="sort" value="artistdesc">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Extra options</legend>
+                    <label>
+                        Top pieces only
+                        <input type="checkbox" name="top-piece" checked>
+                    </label>
+                    <label>
+                        With image only
+                        <input type="checkbox" name="image-only" checked>
+                    </label>
+                </fieldset>
+                <button>
+                    Search art
+                </button>
+            </form>
+        </div>
     </aside>
 
     <footer>
-        <button>
-            🔎
-        </button>
+        <section>
+
+            <button aria-label="toggle-favorites">
+                ❤️
+            </button>
+            <button aria-label="toggle-filters">
+                🔎
+            </button>
+        </section>
     </footer>
 
     <dialog></dialog>
