@@ -1,3 +1,4 @@
+export const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 export const $ = (selector) => document.querySelector(selector);
 export const $$ = (selector) => document.querySelectorAll(selector);
 export const get = async (url) => {

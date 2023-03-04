@@ -1,5 +1,6 @@
 import { fetchDetailImages } from "./data.js";
 import { showInfo } from "./details.js";
+import { isMobile } from "./helpers.js";
 
 export const artcard = async({ item, saveButtonIcon, resultsContainer, observe = false, }) => {
 
@@ -20,6 +21,18 @@ export const artcard = async({ item, saveButtonIcon, resultsContainer, observe =
         alt = `${item.title} Only available in the Rijksmuseum`;
     }
 
+    let showOptions = {
+        text: '',
+        class: '',
+    }
+
+    if (isMobile) {
+        showOptions.text = `Click for options`;
+        showOptions.class = 'mobile';
+    } else {
+        showOptions.text = `Hover for options`;
+    }
+
     let html = `
     <li>
         <article>
@@ -31,14 +44,34 @@ export const artcard = async({ item, saveButtonIcon, resultsContainer, observe =
                 <button>${saveButtonIcon}</button>
                 <button>ℹ️</button>
             </section>
+            <button tabIndex="-1" class="${showOptions.class}">${showOptions.text}</button>
         </article>
     </li>
     `;
     resultsContainer.insertAdjacentHTML('beforeend', html);
 
     const lastItem = resultsContainer.lastElementChild;
-    const infoButton = lastItem.querySelector('button:last-of-type');
+    const infoButton = lastItem.querySelector('section > button:last-of-type');
     infoButton.addEventListener('click', (e) => showInfo(e, item));
+
+    if(isMobile){
+        const optionsButton = lastItem.querySelector('article > button');
+
+        optionsButton.addEventListener('touchstart', (e) => {
+            console.log(e.target);
+            console.log('touchstart');
+            e.target.closest('li').classList.toggle('show-options');
+
+            setTimeout(() => {
+                e.target.closest('li').classList.add('continue-navigation');
+            }, 500);
+
+            setTimeout(() => {
+                e.target.closest('li').classList.remove('continue-navigation');
+                e.target.closest('li').classList.toggle('show-options');
+            }, 5000);
+        });
+    }
 
     if(observe){
 

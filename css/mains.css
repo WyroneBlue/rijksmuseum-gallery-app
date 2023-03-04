@@ -10,6 +10,11 @@
     src: url('../assets/fonts/MuseoModerno-VariableFont_wght.ttf');
 }
 
+:focus{
+    outline: 2px solid red;
+    outline-offset: 4px;
+}
+
 :root{
     --main-color: pink;
     --bg-color: var(--main-color);
@@ -223,12 +228,10 @@ aside ul li.skeleton{
     transform: scale(1);
 }
 
-/* dark images for not hovered? */
-
 main ul li.loaded,
 aside ul li.loaded{
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
 }
 
 main ul li.skeleton::before,
@@ -278,8 +281,13 @@ aside ul li a img{
     transition: all 0.6s ease-in;
 }
 
-main ul li:hover a img,
-aside ul li:hover a img{
+main ul li.show-options a img,
+aside ul li.show-options a img,
+main ul li:hover:not(:has(button.mobile)) a img,
+aside ul li:hover:not(:has(button.mobile)) a img,
+main ul li:focus-within:not(:has(button.mobile)) a img,
+aside ul li:focus-within:not(:has(button.mobile)) a img{
+
     transform: scale(1);
     filter: brightness(0.8)
 }
@@ -294,11 +302,20 @@ aside ul li a h3{
     z-index: 4;
     transition: all 0.6s ease-in;
     color: white;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     filter: drop-shadow(0 0 10px black);
 }
 
-main ul li:hover a h3,
-aside ul li:hover a h3{
+main ul li.show-options a h3,
+aside ul li.show-options a h3,
+main ul li:hover:not(:has(button.mobile)) a h3,
+aside ul li:hover:not(:has(button.mobile)) a h3,
+main ul li:focus-within:not(:has(button.mobile)) a h3,
+aside ul li:focus-within:not(:has(button.mobile)) a h3{
     opacity: 1;
 }
 
@@ -320,8 +337,41 @@ aside ul li section button{
     border-radius: 50%;
     opacity: 0;
     aspect-ratio: 1/1;
+    font-size: 1.25rem;
     transition: .6s ease-in;
     z-index: 99;
+}
+
+li article > button{
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, .2);
+    font-weight: 700;
+    z-index: 99;
+    pointer-events: all;
+    transition: .6s ease-in;
+}
+
+li article:has(> button.mobile) a{
+    pointer-events: none;
+}
+
+li.show-options article > button,
+li:hover article > button:not(.mobile),
+li:focus-within article > button{
+    opacity: 0;
+}
+
+li:hover article > button:not(.mobile),
+li.continue-navigation article > button{
+    /* opacity: 1; */
+    pointer-events: none;
+}
+
+
+li:hover article:has(> button:not(.mobile)) a,
+li.show-options article:has(button.mobile) a{
+    pointer-events: all;
 }
 
 main button.saved{
@@ -359,8 +409,12 @@ main button.removed{
     }
 }
 
-main ul li:hover section button,
-aside ul li:hover section button{
+main ul li.show-options section button,
+aside ul li.show-options section button,
+main ul li:hover:not(:has(button.mobile)) section button,
+aside ul li:hover:not(:has(button.mobile)) section button,
+main ul li:focus-within:not(:has(button.mobile)) section button,
+aside ul li:focus-within:not(:has(button.mobile)) section button{
     opacity: 1;
 }
 
