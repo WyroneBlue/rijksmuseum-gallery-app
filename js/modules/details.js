@@ -34,7 +34,7 @@ export const showDetails = async() => {
             </section>
         `;
 
-        const saveButton = main.querySelector('button');
+        const saveButton = $('button', main);
         saveButton.addEventListener('click', (e) => toggleFavorite(e, details.objectNumber));
     }
 
@@ -70,7 +70,7 @@ export const showInfo = (e, item) => {
         </div>
     `;
 
-    const detailButton = dialog.querySelector('a:last-of-type');
+    const detailButton = $('a:last-of-type', dialog);
     detailButton.addEventListener('click', () => {
         closeDialog();
     });

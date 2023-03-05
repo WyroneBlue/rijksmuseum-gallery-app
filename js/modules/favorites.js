@@ -25,8 +25,6 @@ export const showFavoriteAnimation = (el, className, icon) => {
 }
 
 export const toggleFavorite = (e, objectNumber) => {
-    console.log('save favorite', objectNumber);
-    console.log(e.target);
 
     const favoButton = e.target;
     if (isFavorite(objectNumber)) {
@@ -39,8 +37,6 @@ export const toggleFavorite = (e, objectNumber) => {
         showFavoriteAnimation(favoButton, 'saved', '❤️');
     }
     saveFavorites();
-
-    console.log('saved favorite', favoritesArray);
 }
 
 function addFavorite(id){

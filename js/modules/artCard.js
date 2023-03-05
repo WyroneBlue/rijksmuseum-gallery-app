@@ -1,3 +1,4 @@
+import { $ } from "./helpers.js";
 import { fetchDetailImages } from "./data.js";
 import { showInfo } from "./details.js";
 import { isMobile } from "./helpers.js";
@@ -51,15 +52,14 @@ export const artcard = async({ item, saveButtonIcon, resultsContainer, observe =
     resultsContainer.insertAdjacentHTML('beforeend', html);
 
     const lastItem = resultsContainer.lastElementChild;
-    const infoButton = lastItem.querySelector('section > button:last-of-type');
+    const infoButton = $('section > button:last-of-type', lastItem);
     infoButton.addEventListener('click', (e) => showInfo(e, item));
 
     if(isMobile){
-        const optionsButton = lastItem.querySelector('article > button');
+        const optionsButton = $('article > button', lastItem);
 
         optionsButton.addEventListener('touchstart', (e) => {
-            console.log(e.target);
-            console.log('touchstart');
+
             e.target.closest('li').classList.toggle('show-options');
 
             setTimeout(() => {
@@ -75,7 +75,7 @@ export const artcard = async({ item, saveButtonIcon, resultsContainer, observe =
 
     if(observe){
 
-        const observerImage = lastItem.querySelector('img');
+        const observerImage = $('img', lastItem);
         const imageOptions = {
             rootMargin: '0px 0px 200px 0px',
         }

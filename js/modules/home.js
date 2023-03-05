@@ -55,7 +55,7 @@ export function renderHTML(items, fresh = false) {
         await artcard({ item, saveButtonIcon, resultsContainer, observe: true });
 
         const lastItem = resultsContainer.lastElementChild;
-        const saveButton = lastItem.querySelector('button:first-of-type');
+        const saveButton = $('button:first-of-type', lastItem);
         saveButton.addEventListener('click', (e) => toggleFavorite(e, item.objectNumber));
     });
 }

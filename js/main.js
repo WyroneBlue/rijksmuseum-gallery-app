@@ -1,11 +1,11 @@
 console.log('Hello World!');
 
-import { $ } from './helpers.js';
-import router from './router.js';
-import { renderHTML } from './home.js';
-import { fetchDetails, renderSkeleton, searchItems } from './data.js';
-import { artcard } from './artCard.js';
-import { removeFavorite, favoritesArray, showFavoritesCount, emptyState } from './favorites.js';
+import router from './modules/router.js';
+import { $ } from './modules/helpers.js';
+import { renderHTML } from './modules/home.js';
+import { fetchDetails, renderSkeleton, searchItems } from './modules/data.js';
+import { artcard } from './modules/artCard.js';
+import { removeFavorite, favoritesArray, showFavoritesCount, emptyState } from './modules/favorites.js';
 
 
 const favoButton = $('footer button[aria-label="toggle-favorites"]');
@@ -33,10 +33,10 @@ form.addEventListener('submit', async (e) => {
         window.location = '#home';
     }
 
-    const search = form.querySelector('label:first-of-type input').value;
-    const sort = form.querySelector('fieldset input:checked').value;
-    const topPiece = form.querySelector('fieldset label:first-of-type input[name="top-piece"]').checked;
-    const imageOnly = form.querySelector('fieldset label:last-of-type input[name="image-only"]').checked;
+    const search = $('label:first-of-type input', form).value;
+    const sort = $('fieldset input:checked', form).value;
+    const topPiece = $('fieldset label:first-of-type input[name="top-piece"]', form).checked;
+    const imageOnly = $('fieldset label:last-of-type input[name="image-only"]', form).checked;
 
     toggleFilters();
 
@@ -49,7 +49,6 @@ form.addEventListener('submit', async (e) => {
 });
 
 const removeItem = (e, objectNumber) => {
-    console.log('remove favorite', objectNumber);
     const confirmRemove = confirm('Are you sure you want to remove this item from your favorites?');
 
     if (confirmRemove) {
@@ -83,7 +82,7 @@ const loadFavorites = async () => {
 
         const lastItem = favoritesList.lastElementChild;
 
-        const removeButton = lastItem.querySelector('button:first-of-type');
+        const removeButton = $('button:first-of-type', lastItem);
         removeButton.addEventListener('click', (e) => removeItem(e, item.objectNumber));
     });
 }

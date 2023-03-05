@@ -1,8 +1,8 @@
+import { closeWindows } from '../main.js';
 import { $ } from './helpers.js';
 import { showDetails } from './details.js';
 import { loadHome } from './home.js';
 import { showError } from './error.js';
-import { closeWindows } from './main.js';
 const main = $('main');
 
 const routes = {
