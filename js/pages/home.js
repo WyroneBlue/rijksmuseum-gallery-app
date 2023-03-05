@@ -1,7 +1,7 @@
-import { $ } from './helpers.js';
-import { fetchItems, renderSkeleton } from './data.js';
-import { artcard } from './artCard.js';
-import { isFavorite, toggleFavorite } from './favorites.js';
+import { $ } from '../modules/helpers.js';
+import { fetchItems, renderSkeleton } from '../modules/data.js';
+import { artcard } from '../modules/artCard.js';
+import { isFavorite, toggleFavorite } from '../modules/favorites.js';
 
 const main = $('main');
 

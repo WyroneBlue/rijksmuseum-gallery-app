@@ -1,7 +1,7 @@
-import { $ } from './helpers.js';
-import { fetchDetails } from './data.js';
-import { isFavorite, toggleFavorite } from './favorites.js';
-import { transitionPage } from './router.js';
+import { $ } from '../modules/helpers.js';
+import { fetchDetails } from '../modules/data.js';
+import { isFavorite, toggleFavorite } from '../modules/favorites.js';
+import { transitionPage } from '../modules/router.js';
 
 const main = $('main');
 const dialog = $('dialog');

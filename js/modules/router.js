@@ -1,7 +1,7 @@
-import { closeWindows } from '../main.js';
 import { $ } from './helpers.js';
-import { showDetails } from './details.js';
-import { loadHome } from './home.js';
+import { closeWindows } from '../main.js';
+import { loadHome } from '../pages/home.js';
+import { showDetails } from '../pages/details.js';
 import { showError } from './error.js';
 const main = $('main');
 

@@ -1,7 +1,7 @@
 import { $ } from "./helpers.js";
 import { fetchDetailImages } from "./data.js";
-import { showInfo } from "./details.js";
 import { isMobile } from "./helpers.js";
+import { showInfo } from "../pages/details.js";
 
 export const artcard = async({ item, saveButtonIcon, resultsContainer, observe = false, }) => {
 

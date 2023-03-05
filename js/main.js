@@ -2,11 +2,10 @@ console.log('Hello World!');
 
 import router from './modules/router.js';
 import { $ } from './modules/helpers.js';
-import { renderHTML } from './modules/home.js';
 import { fetchDetails, renderSkeleton, searchItems } from './modules/data.js';
 import { artcard } from './modules/artCard.js';
 import { removeFavorite, favoritesArray, showFavoritesCount, emptyState } from './modules/favorites.js';
-
+import { renderHTML } from './pages/home.js';
 
 const favoButton = $('footer button[aria-label="toggle-favorites"]');
 const favorites = $('aside[aria-label="favorites"]');
