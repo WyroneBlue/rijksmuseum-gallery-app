@@ -65,6 +65,6 @@ Done
 - [x] Create wireflow diagram
 
 ## Wishlist
-- [] Better error handling
-- [] Add better support for mobile devices and certain browsers
-- [] Add support for multiple languages
+- [ ] Better error handling
+- [ ] Add better support for mobile devices and certain browsers
+- [ ] Add support for multiple languages
