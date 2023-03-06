@@ -548,9 +548,14 @@ aside form fieldset label:has(input:checked){
 }
 
 aside form button{
-    background-color: aqua;
-    border-radius: 5px;
     padding: 10px 20px;
+    background-color: black;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+aside form button{
 }
 
 dialog[open]{
