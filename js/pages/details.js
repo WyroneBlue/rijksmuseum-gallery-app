@@ -7,7 +7,7 @@ const main = $('main');
 const dialog = $('dialog');
 
 export const showDetails = async() => {
-    renderSkeleton();
+    renderLoading();
 
     const id = window.location.hash.split('/')[1];
     const { artObject: details} = await fetchDetails(id);
@@ -38,7 +38,7 @@ export const showDetails = async() => {
         saveButton.addEventListener('click', (e) => toggleFavorite(e, details.objectNumber));
     }
 
-    function renderSkeleton () {
+    function renderLoading () {
 
         main.classList.add('loading');
         main.innerHTML = `

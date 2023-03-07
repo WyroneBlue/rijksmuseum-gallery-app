@@ -20,7 +20,7 @@ export const loadHome = async () => {
     const moreresultsSection = $('main > span');
 
     setTimeout(() => {
-        renderHTML(items, true);
+        renderArtDisplay(items, true);
         initialLoad = false;
     }, 1000);
 
@@ -35,14 +35,14 @@ export const loadHome = async () => {
             if (!initialLoad) {
                 page++;
                 const { artObjects: items } = await fetchItems(page);
-                renderHTML(items);
+                renderArtDisplay(items);
             }
         }
     }, moreResultsOptions);
     moreResultsObserver.observe(moreresultsSection);
 }
 
-export function renderHTML(items, fresh = false) {
+export function renderArtDisplay(items, fresh = false) {
     const resultsContainer = $('main > ul');
     if (fresh) {
         resultsContainer.innerHTML = '';

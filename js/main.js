@@ -5,7 +5,7 @@ import { $ } from './modules/helpers.js';
 import { fetchDetails, renderSkeleton, searchItems } from './modules/data.js';
 import { artcard } from './modules/artCard.js';
 import { removeFavorite, favoritesArray, showFavoritesCount, emptyState } from './modules/favorites.js';
-import { renderHTML } from './pages/home.js';
+import { renderArtDisplay } from './pages/home.js';
 
 const favoButton = $('footer button[aria-label="toggle-favorites"]');
 const favorites = $('aside[aria-label="favorites"]');
@@ -23,7 +23,7 @@ filterButton.addEventListener('click', toggleFilters);
 closeFilters.addEventListener('click', toggleFilters);
 closeFavorites.addEventListener('click', toggleFavorites);
 
-form.addEventListener('submit', async (e) => {
+const searhArt = async (e) => {
     e.preventDefault();
 
     let freshLoad = true;
@@ -43,9 +43,9 @@ form.addEventListener('submit', async (e) => {
 
     setTimeout(() => {
         // Checken of home is en geladen dan pas card vullen
-        renderHTML(items, freshLoad);
+        renderArtDisplay(items, freshLoad);
     }, 500);
-});
+}
 
 const removeItem = (e, objectNumber) => {
     const confirmRemove = confirm('Are you sure you want to remove this item from your favorites?');
@@ -114,5 +114,7 @@ export function closeWindows () {
         toggleFavorites();
     }
 }
+
+form.addEventListener('submit', searhArt);
 
 router();
