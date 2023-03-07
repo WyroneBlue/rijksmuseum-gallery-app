@@ -13,6 +13,10 @@ export const loadHome = async () => {
     renderSkeleton(main);
 
     const { artObjects: items } = await fetchItems(page);
+    if(!items || items.length === 0){
+        renderError();
+        return;
+    }
     const moreresultsSection = $('main > span');
 
     setTimeout(() => {
@@ -57,5 +61,25 @@ export function renderHTML(items, fresh = false) {
         const lastItem = resultsContainer.lastElementChild;
         const saveButton = $('button:first-of-type', lastItem);
         saveButton.addEventListener('click', (e) => toggleFavorite(e, item.objectNumber));
+    });
+}
+
+export function renderError() {
+    const button = document.createElement('button');
+    button.innerHTML = 'Try again 🔃';
+
+    main.innerHTML = `
+        <section>
+            <p>Something went wrong while getting Art from the Rijksmuseum</p>
+            ${button.outerHTML}
+        </section>
+    `;
+
+    main.classList.add('error');
+
+    const retryButton = $('button', main);
+    console.log(retryButton);
+    retryButton.addEventListener('click', () => {
+        loadHome();
     });
 }
