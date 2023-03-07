@@ -5,21 +5,20 @@ import { showInfo } from "../pages/details.js";
 
 export const artcard = async({ item, saveButtonIcon, resultsContainer, observe = false, }) => {
 
-    const images = await fetchDetailImages(item.objectNumber);
-
     let img;
     let alt;
-    if(images && images.levels){
+    try {
+
+        const images = await fetchDetailImages(item.objectNumber);
         const { tiles } = images.levels.filter(image => image.name === "z4")[0];
         const lowestImage = tiles[0].url;
         img = lowestImage;
         alt = item.title;
-
-    } else {
-
+    } catch (error) {
         const imgPlaceholder = 'https://via.placeholder.com/300x300?text=No+image+available';
         img = imgPlaceholder;
         alt = `${item.title} Only available in the Rijksmuseum`;
+        console.log(error);
     }
 
     let showOptions = {
