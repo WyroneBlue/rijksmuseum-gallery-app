@@ -42,8 +42,7 @@ The Rijksmuseum Gallery App has the following features:
 - Access the search and favorites list from the menu in the bottom right corner
 
 ## Activity Diagram
-<!-- Still incoming -->
-![Rijksmuseum Gallery App Activity Diagram](activity-diagram.png)
+![Rijksmuseum Gallery App Activity Diagram](./docs/images/activity-diagram.jpg)
 
 ## External Data Source
 The Rijksmuseum Gallery App uses the Rijksmuseum API as its external data source. The API provides a collection of high-resolution images and metadata for art pieces in the Rijksmuseum's collection.
