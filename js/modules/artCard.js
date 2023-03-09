@@ -11,7 +11,7 @@ export const artcard = async({ item, saveButtonIcon, resultsContainer, observe =
 
         const images = await fetchDetailImages(item.objectNumber);
         const { tiles } = images.levels.filter(image => image.name === "z4")[0];
-        const lowestImage = tiles[0].url;
+        const lowestImage = tiles[0].url.replace('http', 'https');
         img = lowestImage;
         alt = item.title;
     } catch (error) {
