@@ -94,7 +94,7 @@ header section h2::before{
     content: "";
     position: absolute;
     bottom: -4px;
-    height: 4px;
+    height: 6px;
     background-color: var(--accent-2);
     animation: load_underline .6s 1.2s ease-out forwards;
 }
@@ -104,7 +104,7 @@ header section h2::before{
         width: 0;
     }
     100%{
-        width: 20px;
+        width: 30px;
     }
 }
 
@@ -658,7 +658,7 @@ dialog[open] div a:first-of-type{
 }
 
 dialog[open] div a:last-of-type{
-    color: white;
+    color: black;
     font-weight: 700;
     background-color: var(--accent-2);
 }
@@ -673,9 +673,30 @@ body#details main section{
     margin-inline: auto;
 }
 
-body#details main section a{
+body#details main section nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap-reverse;
+}
+
+body#details main section nav a{
     display: block;
     width: fit-content;
+}
+
+body#details main section nav a:last-of-type{
+    background-color: var(--accent-2);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+body#details main section nav a:last-of-type::after{
+    content: " 🔗";
+    padding: 1px 4px;
+    background-color: white;
+    border-radius: 50%;
 }
 
 body#details main article{
@@ -693,7 +714,7 @@ body#details main article img{
 
 body#details main article button{
     position: absolute;
-    top: 50px;
+    top: 10px;
     right: 10px;
     width: 50px;
     height: 50px;

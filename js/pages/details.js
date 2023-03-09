@@ -31,14 +31,21 @@ export const showDetails = async() => {
             msg = ': <span>Only available in the Rijksmuseum</span>';
         }
 
+        const url = `http://www.rijksmuseum.nl/nl/collectie/${details.objectNumber}`;
+
         main.innerHTML = `
             <section>
-                <a href="#home">Back to home</a>
+                <nav>
+                    <a href="#home">Back to home</a>
+                    <a href="${url}" target="_blank">Rijksmuseum </a>
+                </nav>
                 <article>
                     <h1>${details.title}${msg}</h1>
-                    <img src="${image}" alt="${details.title}">
-                    <p>${details.longTitle}</p>
-                    <button>${saveButtonIcon}</button>
+                    <div>
+                        <img src="${image}" alt="${details.title}">
+                        <p>${details.longTitle}</p>
+                        <button>${saveButtonIcon}</button>
+                    </div>
                 </article>
             </section>
         `;
