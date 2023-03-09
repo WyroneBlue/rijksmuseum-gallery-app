@@ -528,13 +528,12 @@ aside[aria-label="favorites"] ul{
     gap: 10px;
 }
 
-aside[aria-label="favorites"] ul li{
+aside[aria-label="favorites"] ul > li{
     display: flex;
     flex-direction: column;
 }
 
-aside[aria-label="favorites"].show,
-aside[aria-label="filters"].show{
+aside.show{
     opacity: 1;
     transform: translateY(0);
     overflow-y: auto;
@@ -708,9 +707,12 @@ body#details main article{
     margin-top: 20px;
 }
 
+body#details main article div{
+    max-height: 80vh;
+}
+
 body#details main article img{
     width: 100%;
-    max-height: 600px;
 }
 
 body#details main article button{

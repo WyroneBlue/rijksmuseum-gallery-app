@@ -19,14 +19,13 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
         } else {
             img = item.webImage.url;
         }
+        alt = `Image for ${item.title}.`;
 
-        alt = item.title;
     } catch (error) { // If that fails, use a placeholder image
 
         const imgPlaceholder = './assets/images/explore-placeholder.jpg';
         img = imgPlaceholder;
-        alt = `${item.title} Only available in the Rijksmuseum`;
-        console.log(error);
+        alt = `Placeholder image for ${item.title}. This image is only available in the Rijksmuseum`;
     }
 
     // initialize options for mobile and desktop
@@ -50,10 +49,14 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
                 <h3>${item.title}</h3>
                 <img data-src="${img}" alt="${alt}">
             </a>
-            <section>
-                <button>${saveButtonIcon}</button>
-                <button>ℹ️</button>
-            </section>
+            <menu>
+                <li>
+                    <button>${saveButtonIcon}</button>
+                </li>
+                <li>
+                    <button>ℹ️</button>
+                </li>
+            </menu>
             <button tabIndex="-1" class="${showOptions.class}">${showOptions.text}</button>
         </article>
     </li>
@@ -61,7 +64,7 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
     resultsContainer.insertAdjacentHTML('beforeend', html);
 
     const lastItem = resultsContainer.lastElementChild;
-    const infoButton = $('section > button:last-of-type', lastItem);
+    const infoButton = $('menu li:last-of-type button', lastItem);
     infoButton.addEventListener('click', (e) => showInfo(e, item));
 
     if(isMobile){

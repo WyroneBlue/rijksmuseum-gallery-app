@@ -63,7 +63,7 @@
         <div>
             <section>
                 <h2>Favorites(<span></span>)</h2>
-                <button>❌</button>
+                <button tabindex="-1">❌</button>
             </section>
 
             <!-- List -->
@@ -76,7 +76,7 @@
         <div>
             <section>
                 <h2>Filters</h2>
-                <button>❌</button>
+                <button tabindex="-1">❌</button>
             </section>
 
             <form>
@@ -84,7 +84,7 @@
                 <!-- Searchbar -->
                 <label>
                     Search
-                    <input type="search" placeholder="Search collection for art or artist....">
+                    <input tabindex="-1" type="search" placeholder="Search collection for art or artist....">
                 </label>
 
                 <!-- Sort options -->
@@ -92,27 +92,27 @@
                     <legend>Sort By</legend>
                     <label>
                         Relevance
-                        <input type="radio" name="sort" value="relevance" checked>
+                        <input tabindex="-1" type="radio" name="sort" value="relevance" checked>
                     </label>
                     <label>
                         Type
-                        <input type="radio" name="sort" value="objecttype">
+                        <input tabindex="-1" type="radio" name="sort" value="objecttype">
                     </label>
                     <label>
                         Oldest first
-                        <input type="radio" name="sort" value="chronologic">
+                        <input tabindex="-1" type="radio" name="sort" value="chronologic">
                     </label>
                     <label>
                         Newest first
-                        <input type="radio" name="sort" value="achronologic">
+                        <input tabindex="-1" type="radio" name="sort" value="achronologic">
                     </label>
                     <label>
                         Artist a-z
-                        <input type="radio" name="sort" value="artist">
+                        <input tabindex="-1" type="radio" name="sort" value="artist">
                     </label>
                     <label>
                         Artist z-a
-                        <input type="radio" name="sort" value="artistdesc">
+                        <input tabindex="-1" type="radio" name="sort" value="artistdesc">
                     </label>
                 </fieldset>
 
@@ -121,16 +121,16 @@
                     <legend>Extra options</legend>
                     <label>
                         Top pieces only
-                        <input type="checkbox" name="top-piece" checked>
+                        <input tabindex="-1" type="checkbox" name="top-piece" checked>
                     </label>
                     <label>
                         With image only
-                        <input type="checkbox" name="image-only" checked>
+                        <input tabindex="-1" type="checkbox" name="image-only" checked>
                     </label>
                 </fieldset>
 
                 <!-- Submit button -->
-                <button>
+                <button tabindex="-1">
                     Search art
                 </button>
             </form>
@@ -139,18 +139,22 @@
 
     <!-- Footer with toggle buttons -->
     <footer>
-        <section>
+        <menu>
 
             <!-- Toggle Favorites button -->
-            <button aria-label="toggle-favorites">
-                ❤️
-            </button>
+            <li>
+                <button aria-label="toggle-favorites">
+                    ❤️
+                </button>
+            </li>
 
             <!-- Toggle filters button -->
-            <button aria-label="toggle-filters">
-                🔎
-            </button>
-        </section>
+            <li>
+                <button aria-label="toggle-filters">
+                    🔎
+                </button>
+            </li>
+        </menu>
     </footer>
 
     <!-- Dialog: Detail info -->

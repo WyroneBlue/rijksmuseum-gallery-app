@@ -66,7 +66,7 @@ export async function renderArtDisplay(items, fresh = false, showMore = false) {
         await artCard({ item, saveButtonIcon, resultsContainer, observe: true });
 
         const lastItem = resultsContainer.lastElementChild;
-        const saveButton = $('button:first-of-type', lastItem);
+        const saveButton = $('menu li:first-of-type button', lastItem);
         saveButton.addEventListener('click', (e) => toggleFavorite(e, item.objectNumber));
     }));
 

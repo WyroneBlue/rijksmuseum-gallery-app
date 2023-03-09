@@ -10,7 +10,7 @@ export const showDetails = async() => {
     renderLoading();
 
     const id = window.location.hash.split('/')[1];
-    const { artObject: details} = await fetchDetails(id);
+    const { artObject: details } = await fetchDetails(id);
 
     setTimeout(() => {
         transitionPage(renderHTML, details);
@@ -22,16 +22,27 @@ export const showDetails = async() => {
 
         const saveButtonIcon = isFavorite(details.objectNumber) ? '❤️' : '🖤';
 
+        const url = `http://www.rijksmuseum.nl/nl/collectie/${details.objectNumber}`;
+
         let image = '';
         let msg = '';
+        let alt = '';
+        let ratio = 1;
         try {
             image = details.webImage.url;
+            ratio = details.webImage.width / details.webImage.height;
+            if (details.plaqueDescriptionDutch) {
+                alt = details.plaqueDescriptionDutch;
+            } else {
+                alt = `Image for ${details.title}.`;
+            }
         } catch (error) {
             image = './assets/images/explore-placeholder.jpg';
             msg = ': <span>Only available in the Rijksmuseum</span>';
+            alt = `Placeholder image for ${details.title}. This image is only available in the Rijksmuseum`;
         }
+        const style = `aspect-ratio: ${ratio}`;
 
-        const url = `http://www.rijksmuseum.nl/nl/collectie/${details.objectNumber}`;
 
         main.innerHTML = `
             <section>
@@ -40,9 +51,9 @@ export const showDetails = async() => {
                     <a href="${url}" target="_blank">Rijksmuseum </a>
                 </nav>
                 <article>
-                    <h1>${details.title}${msg}</h1>
-                    <div>
-                        <img src="${image}" alt="${details.title}">
+                    <h1 tabIndex="0">${details.title}${msg}</h1>
+                    <div style="${style}">
+                        <img tabIndex="0" src="${image}" alt="${alt}">
                         <p>${details.longTitle}</p>
                         <button>${saveButtonIcon}</button>
                     </div>
