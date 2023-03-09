@@ -8,15 +8,25 @@
     <link rel="stylesheet" href="./css/mains.css">
 </head>
 <body>
+    <!-- Header with logo h1 and columnsize picker -->
     <header>
+
+        <!-- clickable h1 -->
         <h1>
             <a href="#home">
                 RGA
             </a>
         </h1>
+
         <section>
+
+            <!-- Explore section -->
             <h2>Explore</h2>
+
+            <!-- Radio options: columnsize picker -->
             <div>
+
+                <!-- 2 columns -->
                 <input type="radio" name="layout" id="col-2">
                 <label for="col-2">
                     <div>
@@ -26,6 +36,8 @@
                         <span></span>
                     </div>
                 </label>
+
+                <!-- 3 columns -->
                 <input type="radio" name="layout" id="col-3">
                 <label for="col-3">
                     <div>
@@ -41,31 +53,41 @@
         </section>
     </header>
 
+    <!-- Main section with art list -->
     <main>
         <ul></ul>
     </main>
 
-
+    <!-- Aside: Favorites list -->
     <aside aria-label="favorites">
         <div>
             <section>
                 <h2>Favorites(<span></span>)</h2>
                 <button>❌</button>
             </section>
+
+            <!-- List -->
             <ul></ul>
         </div>
     </aside>
+
+    <!-- Aside: Search and filters -->
     <aside aria-label="filters">
         <div>
             <section>
                 <h2>Filters</h2>
                 <button>❌</button>
             </section>
+
             <form>
+
+                <!-- Searchbar -->
                 <label>
                     Search
                     <input type="search" placeholder="Search collection for art or artist....">
                 </label>
+
+                <!-- Sort options -->
                 <fieldset>
                     <legend>Sort By</legend>
                     <label>
@@ -93,6 +115,8 @@
                         <input type="radio" name="sort" value="artistdesc">
                     </label>
                 </fieldset>
+
+                <!-- Extra filter options -->
                 <fieldset>
                     <legend>Extra options</legend>
                     <label>
@@ -104,6 +128,8 @@
                         <input type="checkbox" name="image-only" checked>
                     </label>
                 </fieldset>
+
+                <!-- Submit button -->
                 <button>
                     Search art
                 </button>
@@ -111,18 +137,23 @@
         </div>
     </aside>
 
+    <!-- Footer with toggle buttons -->
     <footer>
         <section>
 
+            <!-- Toggle Favorites button -->
             <button aria-label="toggle-favorites">
                 ❤️
             </button>
+
+            <!-- Toggle filters button -->
             <button aria-label="toggle-filters">
                 🔎
             </button>
         </section>
     </footer>
 
+    <!-- Dialog: Detail info -->
     <dialog></dialog>
 
     <script src="./js/main.js" type="module"></script>
