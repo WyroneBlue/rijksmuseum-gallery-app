@@ -16,8 +16,8 @@
 }
 
 :root{
-    --main-color: rgb(193 225 193);
-    --secondary-color: rgb(181 135 248);
+    --main-color: rgb(181 135 248);
+    --secondary-color: rgb(193 225 193);
 
     --border-color: black;
     --border: 2px solid var(--border-color);
@@ -95,7 +95,7 @@ header section h2::before{
     position: absolute;
     bottom: -4px;
     height: 6px;
-    background-color: var(--accent-2);
+    background-color: var(--accent-1);
     animation: load_underline .6s 1.2s ease-out forwards;
 }
 
@@ -121,7 +121,7 @@ header section > div::before{
     position: absolute;
     inset-block: 0;
     width: 50%;
-    background-color: var(--accent-2);
+    background-color: var(--accent-1);
     transition: all 0.3s ease-out;
 }
 
@@ -599,7 +599,7 @@ aside form fieldset label{
 }
 
 aside form fieldset label:has(input:checked){
-    background-color: rgb(181, 135, 248);
+    background-color: var(--accent-2);
 }
 
 aside form button{
