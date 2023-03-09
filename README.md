@@ -15,13 +15,13 @@
   - [Wishlist](#wishlist)
 
 ## Live Demo
-Visit our live demo in Github Pages [here](https://example.com).
+Visit our live demo in Github Pages [here](https://wyroneblue.github.io/rijksmuseum-gallery-app/).
 
 ## Description
-The Rijksmuseum Gallery App is a web application that allows users to browse and search through a collection of art pieces from the Rijksmuseum. Users can also filter and sort the collection, and save their favorite pieces for later viewing.
+The Rijksmuseum Gallery App is a web application that allows users to browse and search through a collection of art pieces from the Rijksmuseum. Users can also filter and sort the collection, and save their favorite pieces for later viewing. The app is built using HTML5, CSS3, and Vanilla JavaScript.
 
 ## Poster Image
-![Rijksmuseum Gallery App Poster](poster.jpg)
+![Rijksmuseum Gallery App Poster](./docs/images/poster.png)
 
 ## Installation
 To install this project, simply clone the repository and open `index.html` in your web browser.
@@ -31,7 +31,7 @@ git clone https://github.com/your-username/rijksmuseum-gallery-app.git
 cd rijksmuseum-gallery-app
 ```
 
-open index.html
+open index.html in your browser of choice, but preferably a chromium-based browser like Google Chrome or Microsoft Edge.
 
 ## Usage
 The Rijksmuseum Gallery App has the following features:
