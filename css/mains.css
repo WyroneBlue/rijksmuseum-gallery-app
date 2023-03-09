@@ -418,7 +418,6 @@ li:focus-within article > button{
 
 li:hover article > button:not(.mobile),
 li.continue-navigation article > button{
-    /* opacity: 1; */
     pointer-events: none;
 }
 
