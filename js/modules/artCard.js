@@ -3,7 +3,7 @@ import { fetchDetailImages } from "./data.js";
 import { isMobile } from "./helpers.js";
 import { showInfo } from "../pages/details.js";
 
-export const artcard = async({ item, saveButtonIcon, resultsContainer, observe = false, }) => {
+export const artCard = async({ item, saveButtonIcon, resultsContainer, observe = false, }) => {
 
     let img;
     let alt;

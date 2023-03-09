@@ -1,6 +1,6 @@
 import { $ } from '../modules/helpers.js';
 import { fetchItems, renderSkeleton } from '../modules/data.js';
-import { artcard } from '../modules/artCard.js';
+import { artCard } from '../modules/artCard.js';
 import { isFavorite, toggleFavorite } from '../modules/favorites.js';
 
 const main = $('main');
@@ -56,7 +56,7 @@ export function renderArtDisplay(items, fresh = false) {
     items.forEach(async item => {
 
         const saveButtonIcon = isFavorite(item.objectNumber) ? '❤️' : '🖤';
-        await artcard({ item, saveButtonIcon, resultsContainer, observe: true });
+        await artCard({ item, saveButtonIcon, resultsContainer, observe: true });
 
         const lastItem = resultsContainer.lastElementChild;
         const saveButton = $('button:first-of-type', lastItem);
