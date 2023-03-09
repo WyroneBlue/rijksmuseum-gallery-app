@@ -3,19 +3,23 @@ import { fetchDetailImages } from "./data.js";
 import { isMobile } from "./helpers.js";
 import { showInfo } from "../pages/details.js";
 
+// Art card component
 export const artCard = async({ item, saveButtonIcon, resultsContainer, observe = false, }) => {
 
     let img;
     let alt;
-    try {
+
+
+    try { // Try to get the low "z4" image quality
 
         const images = await fetchDetailImages(item.objectNumber);
         const { tiles } = images.levels.filter(image => image.name === "z4")[0];
         const lowestImage = tiles[0].url.replace('http', 'https');
         img = lowestImage;
         alt = item.title;
-    } catch (error) {
-        const imgPlaceholder = 'https://via.placeholder.com/300x300?text=No+image+available';
+    } catch (error) { // If that fails, use a placeholder image
+
+        const imgPlaceholder = './assets/images/explore-placeholder.jpg';
         img = imgPlaceholder;
         alt = `${item.title} Only available in the Rijksmuseum`;
         console.log(error);

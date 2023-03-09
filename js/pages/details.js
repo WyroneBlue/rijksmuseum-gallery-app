@@ -22,12 +22,21 @@ export const showDetails = async() => {
 
         const saveButtonIcon = isFavorite(details.objectNumber) ? '❤️' : '🖤';
 
+        let image = '';
+        let msg = '';
+        try {
+            image = details.webImage.url;
+        } catch (error) {
+            image = './assets/images/explore-placeholder.jpg';
+            msg = ': <span>Only available in the Rijksmuseum</span>';
+        }
+
         main.innerHTML = `
             <section>
                 <a href="#home">Back to home</a>
                 <article>
-                    <h1>${details.title}</h1>
-                    <img src="${details.webImage.url}" alt="${details.title}">
+                    <h1>${details.title}${msg}</h1>
+                    <img src="${image}" alt="${details.title}">
                     <p>${details.longTitle}</p>
                     <button>${saveButtonIcon}</button>
                 </article>
