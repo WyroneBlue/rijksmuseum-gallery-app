@@ -1,7 +1,7 @@
 console.log('Hello World!');
 
 import router from './modules/router.js';
-import { $ } from './modules/helpers.js';
+import { $, awaitMap } from './modules/helpers.js';
 import { fetchDetails, renderSkeleton, searchItems } from './modules/data.js';
 import { artCard } from './modules/artCard.js';
 import { removeFavorite, favoritesArray, showFavoritesCount, emptyState } from './modules/favorites.js';
@@ -39,12 +39,14 @@ const searhArt = async (e) => {
 
     toggleFilters();
 
+    const resultsContainer = $('main > ul');
+    renderSkeleton(resultsContainer, false);
+
     const { artObjects: items } = await searchItems(1, search, sort, topPiece, imageOnly);
 
     setTimeout(() => {
-        // Checken of home is en geladen dan pas card vullen
-        renderArtDisplay(items, freshLoad);
-    }, 500);
+        renderArtDisplay(items, freshLoad, true);
+    }, 2000);
 }
 
 const removeItem = (e, objectNumber) => {
@@ -69,7 +71,7 @@ const loadFavorites = async () => {
 
     renderSkeleton(favoritesList, false);
 
-    const items = await Promise.all(favoritesArray.map(async (id) => {
+    const items = await awaitMap(favoritesArray.map(async (id) => {
         const { artObject: item } = await fetchDetails(id);
         return item;
     }));
