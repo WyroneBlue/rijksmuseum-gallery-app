@@ -5,7 +5,8 @@ const language = 'nl';
 const base = `https://www.rijksmuseum.nl/api/${language}/collection`;
 const baseWithKey = `${base}?key=${apiKey}`;
 
-const itemCount = 20;
+const itemCount = 24;
+const searchItemCount = 48;
 
 export const renderSkeleton = (list, container = true) => {
 
@@ -23,6 +24,6 @@ export const renderSkeleton = (list, container = true) => {
 }
 
 export const fetchItems = async (page) => await get(`${baseWithKey}&ps=${itemCount}&p=${page}`);
-export const searchItems = async (page, search, sort, topPiece, imgOnly) => await get(`${baseWithKey}&p=${page}&ps=${itemCount}&q=${search}&s=${sort}&toppieces=${topPiece}&imgonly=${imgOnly}`);
+export const searchItems = async (page, search, sort, topPiece, imgOnly) => await get(`${baseWithKey}&p=${page}&ps=${searchItemCount}&q=${search}&s=${sort}&toppieces=${topPiece}&imgonly=${imgOnly}`);
 export const fetchDetails = async (id) => await get(`${base}/${id}?key=${apiKey}`);
 export const fetchDetailImages = async (id) => await get(`${base}/${id}/tiles?key=${apiKey}`);

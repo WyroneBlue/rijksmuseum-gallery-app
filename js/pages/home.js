@@ -1,4 +1,4 @@
-import { $ } from '../modules/helpers.js';
+import { $, awaitMap } from '../modules/helpers.js';
 import { fetchItems, renderSkeleton } from '../modules/data.js';
 import { artCard } from '../modules/artCard.js';
 import { isFavorite, toggleFavorite } from '../modules/favorites.js';
@@ -42,26 +42,49 @@ export const loadHome = async () => {
     moreResultsObserver.observe(moreresultsSection);
 }
 
-export function renderArtDisplay(items, fresh = false) {
+export async function renderArtDisplay(items, fresh = false, showMore = false) {
     const resultsContainer = $('main > ul');
     if (fresh) {
         resultsContainer.innerHTML = '';
     }
 
     if (items.length === 0) {
-        resultsContainer.innerHTML = '<li class="loaded">There were no art pieces found</li>';
+        resultsContainer.innerHTML = `
+            <li class="loaded empty-search">
+                <div>
+                    <p>There were no art pieces found! </p>
+                    Try another search or check out the art items below
+                    <span>⬇️</span>
+                </div>
+            </li>
+        `;
         return;
     }
 
-    items.forEach(async item => {
-
+    await awaitMap(items.map(async (item) => {
         const saveButtonIcon = isFavorite(item.objectNumber) ? '❤️' : '🖤';
         await artCard({ item, saveButtonIcon, resultsContainer, observe: true });
 
         const lastItem = resultsContainer.lastElementChild;
         const saveButton = $('button:first-of-type', lastItem);
         saveButton.addEventListener('click', (e) => toggleFavorite(e, item.objectNumber));
-    });
+    }));
+
+    if (showMore) {
+        const moreResultsSection = document.createElement('li');
+        moreResultsSection.classList.add('see-other');
+        moreResultsSection.classList.add('loaded');
+
+        moreResultsSection.innerHTML = `
+        <div>
+            <p>Those were the search results ✅</p>
+            Check out the other items below
+            <span>⬇️</span>
+        </div>
+        `;
+
+        resultsContainer.appendChild(moreResultsSection);
+    }
 }
 
 export function renderError() {

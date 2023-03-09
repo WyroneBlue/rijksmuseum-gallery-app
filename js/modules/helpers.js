@@ -15,3 +15,7 @@ export const get = async (url) => {
         return error;
     }
 }
+
+export const awaitMap = async (callback) => {
+    return await Promise.all(callback);
+};
