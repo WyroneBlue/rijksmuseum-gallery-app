@@ -1,3 +1,4 @@
+/* Css reset */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -5,16 +6,13 @@
     position: relative;
 }
 
+/* Custom font */
 @font-face {
     font-family: 'MuseoModerno';
     src: url('../assets/fonts/MuseoModerno-VariableFont_wght.ttf');
 }
 
-:focus{
-    outline: 2px solid red;
-    outline-offset: 4px;
-}
-
+/* Variables */
 :root{
     --main-color: rgb(181 135 248);
     --secondary-color: rgb(193 225 193);
@@ -34,12 +32,20 @@
     --container-padding: 20px;
 }
 
+/* Focus state outline */
+:focus{
+    outline: 2px solid red;
+    outline-offset: 4px;
+}
+
+/* Global styles */
 body {
     font-family: 'MuseoModerno', sans-serif;
     max-width: 960px;
     margin-inline: auto;
 }
 
+/* Hide overflow on body if dialog or aside is open */
 body:has(aside.show),
 body:has(dialog[open]){
     overflow: hidden;
@@ -64,6 +70,7 @@ header, main, aside, footer, dialog {
     padding: var(--container-padding);
 }
 
+/* Start header */
 header{
     position: sticky;
     top: -60px;
@@ -164,7 +171,9 @@ header section > div label div span{
 header section div input{
     display: none;
 }
+/* End header */
 
+/* Start main */
 main{
     display: flex;
     flex-direction: column;
@@ -229,7 +238,9 @@ main.error button{
         transform: translateX(150%);
     }
 }
+/* End main */
 
+/* Start items main and aside */
 main ul,
 aside ul{
     display: grid;
@@ -421,7 +432,6 @@ li.continue-navigation article > button{
     pointer-events: none;
 }
 
-
 li:hover article:has(> button:not(.mobile)) a,
 li.show-options article:has(button.mobile) a{
     pointer-events: all;
@@ -470,7 +480,9 @@ main ul > li:focus-within:not(:has(button.mobile)) menu button,
 aside ul > li:focus-within:not(:has(button.mobile)) menu button{
     opacity: 1;
 }
+/* End items main and aside */
 
+/* Start spinner */
 main span{
     display: grid;
     place-content: center;
@@ -499,7 +511,9 @@ main span::before{
         transform: rotate(360deg) translateX(-50%);
     }
 }
+/* End spinner */
 
+/* Start footer */
 footer menu {
     position: fixed;
     bottom: 20px;
@@ -515,7 +529,9 @@ footer button {
     height: 50px;
     border-radius: 50%;
 }
+/* End footer */
 
+/* Start aside */
 aside{
     position: fixed;
     bottom: 0;
@@ -636,7 +652,9 @@ aside form button{
 aside form button:hover{
     background-color: rgba(0, 0, 0, 1);
 }
+/* End aside */
 
+/* Start dialog */
 dialog[open]{
     position: fixed;
     inset: 0;
@@ -684,7 +702,9 @@ dialog[open] div a:last-of-type{
     font-weight: 700;
     background-color: var(--accent-2);
 }
+/* End dialog */
 
+/* Start details */
 body#details main span{
     display: inline;
     color: red;
@@ -745,3 +765,4 @@ body#details main article button{
     height: 50px;
     border-radius: 50%;
 }
+/* End details */
