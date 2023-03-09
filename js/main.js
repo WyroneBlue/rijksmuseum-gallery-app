@@ -1,7 +1,7 @@
 console.log('Hello World!');
 
 import router from './modules/router.js';
-import { $, awaitMap } from './modules/helpers.js';
+import { $, $$, awaitMap } from './modules/helpers.js';
 import { fetchDetails, renderSkeleton, searchItems } from './modules/data.js';
 import { artCard } from './modules/artCard.js';
 import { removeFavorite, favoritesArray, showFavoritesCount, emptyState } from './modules/favorites.js';
@@ -77,7 +77,7 @@ const loadFavorites = async () => {
     }));
     favoritesList.innerHTML = '';
 
-    items.forEach(async item => {
+    await awaitMap(items.map(async item => {
         const saveButtonIcon = "❌";
         await artCard({ item, saveButtonIcon, observe: true, resultsContainer: favoritesList });
 
@@ -85,7 +85,7 @@ const loadFavorites = async () => {
 
         const removeButton = $('button:first-of-type', lastItem);
         removeButton.addEventListener('click', (e) => removeItem(e, item.objectNumber));
-    });
+    }));
 }
 
 export async function toggleFavorites (){
@@ -96,7 +96,15 @@ export async function toggleFavorites (){
     favorites.classList.toggle('show');
 
     if(favorites.classList.contains('show')) {
-        loadFavorites();
+        await loadFavorites();
+        const firstItem = $('[tabindex]', favoritesList);
+
+        firstItem.focus();
+
+        document.addEventListener('keydown', closeOnEscape);
+    } else {
+        favoritesList.innerHTML = '';
+        document.removeEventListener('keydown', closeOnEscape);
     }
 }
 
@@ -106,6 +114,19 @@ export function toggleFilters (){
         toggleFavorites();
     }
     filters.classList.toggle('show');
+
+    if(filters.classList.contains('show')) {
+        const items = $$('[tabindex]', filters);
+        console.log(items);
+        setTabindex(items, 0);
+        items[1].focus();
+
+        document.addEventListener('keydown', closeOnEscape);
+    } else {
+        const items = $$('[tabindex]', filters);
+        setTabindex(items, -1);
+        document.removeEventListener('keydown', closeOnEscape);
+    }
 }
 
 export function closeWindows () {
@@ -116,6 +137,19 @@ export function closeWindows () {
         toggleFavorites();
     }
 }
+
+function closeOnEscape(e) {
+    if (e.key === "Escape") {
+        closeWindows();
+    }
+}
+
+function setTabindex(items, value) {
+    items.forEach(item => {
+        item.setAttribute('tabindex', value);
+    });
+}
+
 
 form.addEventListener('submit', searhArt);
 
