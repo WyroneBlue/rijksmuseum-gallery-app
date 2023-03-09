@@ -42,6 +42,7 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
         showOptions.text = `Hover for options`;
     }
 
+    // create the html
     let html = `
     <li>
         <article>
@@ -61,15 +62,24 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
         </article>
     </li>
     `;
+
+    // insert the html to the given container
     resultsContainer.insertAdjacentHTML('beforeend', html);
 
+    // get the last item in the container
     const lastItem = resultsContainer.lastElementChild;
+
+    // add event listeners to the last item
     const infoButton = $('menu li:last-of-type button', lastItem);
     infoButton.addEventListener('click', (e) => showInfo(e, item));
 
+    // check if the device is mobile
     if(isMobile){
+
+        // get the options overlay button
         const optionsButton = $('article > button', lastItem);
 
+        // if the overlay button is clicked toggle the options menu
         optionsButton.addEventListener('touchstart', (e) => {
 
             e.target.closest('li').classList.toggle('show-options');
@@ -85,8 +95,10 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
         });
     }
 
+    // check if card needs to be observed
     if(observe){
 
+        // select the image to observe
         const observerImage = $('img', lastItem);
         const imageOptions = {
             rootMargin: '0px 0px 200px 0px',
@@ -97,13 +109,13 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
             entries.forEach(entry => {
                 const image = entry.target;
 
+                // if the image is in the viewport, load the image else remove the image
                 if (entry.isIntersecting) {
                     image.src = image.dataset.src;
                     image.onload = () => {
                         image.removeAttribute('data-src')
                         image.parentElement.parentElement.parentElement.classList.add('loaded');
                     }
-                    // observer.unobserve(image);
                 } else {
                     image.parentElement.parentElement.parentElement.classList.remove('loaded');
                     image.dataset.src = img;

@@ -1,6 +1,13 @@
+// check if user is using mobile device
 export const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+// query selector shorthand
 export const $ = (selector, el = document) => el.querySelector(selector);
+
+// query selector all shorthand
 export const $$ = (selector, el = document) => el.querySelectorAll(selector);
+
+// fetch including trycatch
 export const get = async (url) => {
     try {
 
@@ -16,6 +23,7 @@ export const get = async (url) => {
     }
 }
 
+// Mapping over an array and returning a promise
 export const awaitMap = async (callback) => {
     return await Promise.all(callback);
 };

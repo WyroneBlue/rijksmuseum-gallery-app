@@ -5,12 +5,14 @@ import { showDetails } from '../pages/details.js';
 import { showError } from './error.js';
 const main = $('main');
 
+// routes
 const routes = {
     'home': loadHome,
     'details': showDetails,
     'error': showError,
 }
 
+// check route and load page
 const checkRoute = () => {
     const hash = window.location.hash.split('/')[0];
     if(!hash || hash === 'home'){
@@ -24,6 +26,16 @@ const checkRoute = () => {
     }
 }
 
+// toggle page transition
+export function transitionPage (func, options = '', time = 1000) {
+    main.classList.add('page-transition');
+    setTimeout(() => {
+        func(options);
+        main.classList.remove('page-transition');
+    }, time);
+}
+
+// event listener for hashchange
 export default async() => {
 
     checkRoute();
@@ -35,18 +47,12 @@ export default async() => {
     })
 }
 
+// set body id
 function setBodyId (id) {
     document.body.id = id;
 }
 
+// Remove hash from string
 function stripHash(hash) {
     return hash.slice(hash.indexOf('#') + 1).split('/')[0];
-}
-
-export function transitionPage (func, options = '', time = 1000) {
-    main.classList.add('page-transition');
-    setTimeout(() => {
-        func(options);
-        main.classList.remove('page-transition');
-    }, time);
 }

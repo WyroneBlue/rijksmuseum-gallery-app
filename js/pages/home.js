@@ -8,10 +8,13 @@ const main = $('main');
 let page = 1;
 let initialLoad = true;
 
+// Show home page
 export const loadHome = async () => {
 
+    // activate loading screen/skeleton
     renderSkeleton(main);
 
+    // Get items from API
     const { artObjects: items } = await fetchItems(page);
     if(!items || items.length === 0){
         renderError();
@@ -19,6 +22,7 @@ export const loadHome = async () => {
     }
     const moreresultsSection = $('main > span');
 
+    // Show items with transition
     setTimeout(() => {
         renderArtDisplay(items, true);
         initialLoad = false;
@@ -28,6 +32,7 @@ export const loadHome = async () => {
         rootMargin: '0px 0px 300px 0px',
     }
 
+    // observe more results section to load more items
     const moreResultsObserver = new IntersectionObserver(async (entries, observer) => {
         const entry = entries[0];
         if (entry.isIntersecting) {
@@ -43,11 +48,14 @@ export const loadHome = async () => {
 }
 
 export async function renderArtDisplay(items, fresh = false, showMore = false) {
+
+    // if fresh, clear results container
     const resultsContainer = $('main > ul');
     if (fresh) {
         resultsContainer.innerHTML = '';
     }
 
+    // if no items are found, show error message and return
     if (items.length === 0) {
         resultsContainer.innerHTML = `
             <li class="loaded empty-search">
@@ -61,6 +69,7 @@ export async function renderArtDisplay(items, fresh = false, showMore = false) {
         return;
     }
 
+    // render items with artCard component
     await awaitMap(items.map(async (item) => {
         const saveButtonIcon = isFavorite(item.objectNumber) ? '❤️' : '🖤';
         await artCard({ item, saveButtonIcon, resultsContainer, observe: true });
@@ -70,6 +79,7 @@ export async function renderArtDisplay(items, fresh = false, showMore = false) {
         saveButton.addEventListener('click', (e) => toggleFavorite(e, item.objectNumber));
     }));
 
+    // if showMore, show more results section(after search results)
     if (showMore) {
         const moreResultsSection = document.createElement('li');
         moreResultsSection.classList.add('see-other');
@@ -87,6 +97,7 @@ export async function renderArtDisplay(items, fresh = false, showMore = false) {
     }
 }
 
+// render error message and retry button
 export function renderError() {
     const button = document.createElement('button');
     button.innerHTML = 'Try again 🔃';
@@ -101,7 +112,6 @@ export function renderError() {
     main.classList.add('error');
 
     const retryButton = $('button', main);
-    console.log(retryButton);
     retryButton.addEventListener('click', () => {
         loadHome();
     });

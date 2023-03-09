@@ -23,6 +23,7 @@ filterButton.addEventListener('click', toggleFilters);
 closeFilters.addEventListener('click', toggleFilters);
 closeFavorites.addEventListener('click', toggleFavorites);
 
+// Get values from form and search for items
 const searhArt = async (e) => {
     e.preventDefault();
 
@@ -49,6 +50,7 @@ const searhArt = async (e) => {
     }, 2000);
 }
 
+// remove item from favorites
 const removeItem = (e, objectNumber) => {
     const confirmRemove = confirm('Are you sure you want to remove this item from your favorites?');
 
@@ -62,6 +64,7 @@ const removeItem = (e, objectNumber) => {
     }
 }
 
+// load favorites from local storage
 const loadFavorites = async () => {
     const count = showFavoritesCount();
     if (count === 0) {
@@ -69,14 +72,17 @@ const loadFavorites = async () => {
         return
     }
 
+    // activate loading screen/skeleton
     renderSkeleton(favoritesList, false);
 
+    // Fetch details for each item
     const items = await awaitMap(favoritesArray.map(async (id) => {
         const { artObject: item } = await fetchDetails(id);
         return item;
     }));
     favoritesList.innerHTML = '';
 
+    // Render each item
     await awaitMap(items.map(async item => {
         const saveButtonIcon = "❌";
         await artCard({ item, saveButtonIcon, observe: true, resultsContainer: favoritesList });
@@ -88,6 +94,7 @@ const loadFavorites = async () => {
     }));
 }
 
+// toggle favorites window
 export async function toggleFavorites (){
 
     if(filters.classList.contains('show')) {
@@ -108,6 +115,7 @@ export async function toggleFavorites (){
     }
 }
 
+// toggle filters window
 export function toggleFilters (){
 
     if(favorites.classList.contains('show')) {
@@ -117,7 +125,6 @@ export function toggleFilters (){
 
     if(filters.classList.contains('show')) {
         const items = $$('[tabindex]', filters);
-        console.log(items);
         setTabindex(items, 0);
         items[1].focus();
 
@@ -129,6 +136,7 @@ export function toggleFilters (){
     }
 }
 
+// close filters and favorites window
 export function closeWindows () {
     if(filters.classList.contains('show')) {
         toggleFilters();
@@ -138,19 +146,21 @@ export function closeWindows () {
     }
 }
 
+// close windows on escape key
 function closeOnEscape(e) {
     if (e.key === "Escape") {
         closeWindows();
     }
 }
 
+// set tabindex for items for accessibility
 function setTabindex(items, value) {
     items.forEach(item => {
         item.setAttribute('tabindex', value);
     });
 }
 
-
 form.addEventListener('submit', searhArt);
 
+// Start the router
 router();
