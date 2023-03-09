@@ -4,6 +4,7 @@
 
 - [Rijksmuseum Gallery App](#rijksmuseum-gallery-app)
   - [Table of Contents](#table-of-contents)
+  - [Full Documentation](#full-documentation)
   - [Live Demo](#live-demo)
   - [Description](#description)
   - [Poster Image](#poster-image)
@@ -13,6 +14,10 @@
   - [External Data Source](#external-data-source)
   - [Checklist](#checklist)
   - [Wishlist](#wishlist)
+
+## Full Documentation
+This readme is a quick overview of the project.
+For the full documentation, please visit my [Github Wiki](https://github.com/WyroneBlue/rijksmuseum-gallery-app/wiki)
 
 ## Live Demo
 Visit our live demo in Github Pages [here](https://wyroneblue.github.io/rijksmuseum-gallery-app/).
