@@ -9,13 +9,17 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
     let img;
     let alt;
 
-
     try { // Try to get the low "z4" image quality
 
         const images = await fetchDetailImages(item.objectNumber);
-        const { tiles } = images.levels.filter(image => image.name === "z4")[0];
-        const lowestImage = tiles[0].url.replace('http', 'https');
-        img = lowestImage;
+        if(images && images.levels){
+            const { tiles } = images.levels.filter(image => image.name === "z4")[0];
+            const lowestImage = tiles[0].url.replace('http', 'https');
+            img = lowestImage;
+        } else {
+            img = item.webImage.url;
+        }
+
         alt = item.title;
     } catch (error) { // If that fails, use a placeholder image
 
@@ -25,11 +29,13 @@ export const artCard = async({ item, saveButtonIcon, resultsContainer, observe =
         console.log(error);
     }
 
+    // initialize options for mobile and desktop
     let showOptions = {
         text: '',
         class: '',
     }
 
+    // set options for mobile and desktop
     if (isMobile) {
         showOptions.text = `Click for options`;
         showOptions.class = 'mobile';
