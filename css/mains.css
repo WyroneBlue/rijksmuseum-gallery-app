@@ -55,7 +55,7 @@ button{
     appearance: none;
 }
 
-ul{
+ul, menu{
     list-style: none;
 }
 
@@ -241,8 +241,8 @@ body:has(header div input:last-of-type:checked) main ul{
     grid-template-columns: var(--3-col-grid);
 }
 
-main ul li,
-aside ul li{
+main ul > li,
+aside ul > li{
     display: grid;
     aspect-ratio: 1/1;
     overflow: hidden;
@@ -253,20 +253,20 @@ aside ul li{
     transition: transform 0.6s ease-out, opacity 0.6s ease-in;
 }
 
-main ul li.skeleton,
-aside ul li.skeleton{
+main ul > li.skeleton,
+aside ul > li.skeleton{
     opacity: 1;
     transform: scale(1);
 }
 
-main ul li.loaded,
-aside ul li.loaded{
+main ul > li.loaded,
+aside ul > li.loaded{
     opacity: 1;
     transform: scale(1);
 }
 
-main ul li.empty-search,
-main ul li.see-other{
+main ul > li.empty-search,
+main ul > li.see-other{
     display: grid;
     grid-column: 1/-1;
     place-content: center;
@@ -275,21 +275,21 @@ main ul li.see-other{
     padding: 20px;
 }
 
-main ul li.empty-search div,
-main ul li.see-other div{
+main ul > li.empty-search div,
+main ul > li.see-other div{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-main ul li.empty-search span,
-main ul li.see-other span{
+main ul > li.empty-search span,
+main ul > li.see-other span{
     font-size: 2rem;
 }
 
-main ul li.skeleton::before,
-aside ul li.skeleton::before{
+main ul > li.skeleton::before,
+aside ul > li.skeleton::before{
     content: "";
     position: absolute;
     top: 50%;
@@ -316,14 +316,14 @@ aside ul li.skeleton::before{
     }
 }
 
-main ul li a,
-aside ul li a{
+main ul > li a,
+aside ul > li a{
     display: grid;
     aspect-ratio: 1/1;
 }
 
-main ul li a img,
-aside ul li a img{
+main ul > li a img,
+aside ul > li a img{
     grid-row: 1/-1;
     grid-column: 1/-1;
     width: 100%;
@@ -334,19 +334,19 @@ aside ul li a img{
     transition: all 0.6s ease-in;
 }
 
-main ul li.show-options a img,
-aside ul li.show-options a img,
-main ul li:hover:not(:has(button.mobile)) a img,
-aside ul li:hover:not(:has(button.mobile)) a img,
-main ul li:focus-within:not(:has(button.mobile)) a img,
-aside ul li:focus-within:not(:has(button.mobile)) a img{
+main ul > li.show-options a img,
+aside ul > li.show-options a img,
+main ul > li:hover:not(:has(button.mobile)) a img,
+aside ul > li:hover:not(:has(button.mobile)) a img,
+main ul > li:focus-within:not(:has(button.mobile)) a img,
+aside ul > li:focus-within:not(:has(button.mobile)) a img{
 
     transform: scale(1);
     filter: brightness(0.8)
 }
 
-main ul li a h3,
-aside ul li a h3{
+main ul > li a h3,
+aside ul > li a h3{
     grid-row: 1/-1;
     grid-column: 1/-1;
     place-self: center;
@@ -363,17 +363,17 @@ aside ul li a h3{
     filter: drop-shadow(0 0 10px black);
 }
 
-main ul li.show-options a h3,
-aside ul li.show-options a h3,
-main ul li:hover:not(:has(button.mobile)) a h3,
-aside ul li:hover:not(:has(button.mobile)) a h3,
-main ul li:focus-within:not(:has(button.mobile)) a h3,
-aside ul li:focus-within:not(:has(button.mobile)) a h3{
+main ul > li.show-options a h3,
+aside ul > li.show-options a h3,
+main ul > li:hover:not(:has(button.mobile)) a h3,
+aside ul > li:hover:not(:has(button.mobile)) a h3,
+main ul > li:focus-within:not(:has(button.mobile)) a h3,
+aside ul > li:focus-within:not(:has(button.mobile)) a h3{
     opacity: 1;
 }
 
-main ul li section,
-aside ul li section{
+main ul > li menu,
+aside ul > li menu{
     position: absolute;
     inset-block: 0;
     right: 0;
@@ -383,9 +383,10 @@ aside ul li section{
     padding: 10px;
 }
 
-main ul li section button,
-aside ul li section button{
+main ul > li menu button,
+aside ul > li menu button{
     padding: 5px;
+    width: 3rem;
     background: white;
     border-radius: 50%;
     opacity: 0;
@@ -462,12 +463,12 @@ main button.removed{
     }
 }
 
-main ul li.show-options section button,
-aside ul li.show-options section button,
-main ul li:hover:not(:has(button.mobile)) section button,
-aside ul li:hover:not(:has(button.mobile)) section button,
-main ul li:focus-within:not(:has(button.mobile)) section button,
-aside ul li:focus-within:not(:has(button.mobile)) section button{
+main ul > li.show-options menu button,
+aside ul > li.show-options menu button,
+main ul > li:hover:not(:has(button.mobile)) menu button,
+aside ul > li:hover:not(:has(button.mobile)) menu button,
+main ul > li:focus-within:not(:has(button.mobile)) menu button,
+aside ul > li:focus-within:not(:has(button.mobile)) menu button{
     opacity: 1;
 }
 
@@ -477,7 +478,7 @@ main span{
     height: 30px;
 }
 
-footer section {
+footer menu {
     position: fixed;
     bottom: 20px;
     right: 20px;
