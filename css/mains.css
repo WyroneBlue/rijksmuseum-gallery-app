@@ -634,6 +634,11 @@ dialog[open] div a:last-of-type{
     background-color: purple;
 }
 
+body#details main span{
+    display: inline;
+    color: red;
+}
+
 body#details main section{
     max-width: 600px;
     margin-inline: auto;
