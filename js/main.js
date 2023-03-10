@@ -56,7 +56,7 @@ const removeItem = (e, objectNumber) => {
 
     if (confirmRemove) {
         removeFavorite(objectNumber);
-        e.target.closest('li').remove();
+        e.target.closest('li.loaded').remove();
         const count = showFavoritesCount();
         if (count === 0) {
             emptyState(favoritesList);
