@@ -2,7 +2,7 @@ import { $ } from './helpers.js';
 import { closeWindows } from '../main.js';
 import { loadHome } from '../pages/home.js';
 import { showDetails } from '../pages/details.js';
-import { showError } from './error.js';
+import { showError } from '../pages/error.js';
 const main = $('main');
 
 // routes
@@ -28,12 +28,12 @@ const checkRoute = () => {
 
 // toggle page transition
 export function transitionPage (func, options = '', time = 1000) {
-    if(main.classList.contains('error')){
-        main.classList.remove('error');
-    };
 
     main.classList.add('page-transition');
     setTimeout(() => {
+        if(main.classList.contains('error')){
+            main.classList.remove('error');
+        };
         func(options);
         main.classList.remove('page-transition');
     }, time);

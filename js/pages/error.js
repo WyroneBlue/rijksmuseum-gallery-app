@@ -1,4 +1,4 @@
-import { $ } from './helpers.js';
+import { $ } from '../modules/helpers.js';
 const main = $('main');
 
 // show error page

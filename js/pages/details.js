@@ -2,7 +2,7 @@ import { $ } from '../modules/helpers.js';
 import { fetchDetails } from '../modules/data.js';
 import { isFavorite, toggleFavorite } from '../modules/favorites.js';
 import { transitionPage } from '../modules/router.js';
-import { showError } from '../modules/error.js';
+import { showError } from './error.js';
 
 const main = $('main');
 const dialog = $('dialog');
