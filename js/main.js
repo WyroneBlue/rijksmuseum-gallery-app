@@ -104,10 +104,11 @@ export async function toggleFavorites (){
 
     if(favorites.classList.contains('show')) {
         await loadFavorites();
-        const firstItem = $('[tabindex]', favoritesList);
+        if (favoritesArray.length > 0){
 
-        firstItem.focus();
-
+            const firstItem = $('[tabindex]', favoritesList);
+            firstItem.focus();
+        }
         document.addEventListener('keydown', closeOnEscape);
     } else {
         favoritesList.innerHTML = '';
