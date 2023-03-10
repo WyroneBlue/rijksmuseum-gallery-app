@@ -104,7 +104,7 @@ export function renderError() {
 
     main.innerHTML = `
         <section>
-            <p>Something went wrong while getting Art from the Rijksmuseum</p>
+            <h2>Something went wrong while getting Art from the Rijksmuseum</h2>
             ${button.outerHTML}
         </section>
     `;

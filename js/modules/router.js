@@ -28,6 +28,10 @@ const checkRoute = () => {
 
 // toggle page transition
 export function transitionPage (func, options = '', time = 1000) {
+    if(main.classList.contains('error')){
+        main.classList.remove('error');
+    };
+
     main.classList.add('page-transition');
     setTimeout(() => {
         func(options);

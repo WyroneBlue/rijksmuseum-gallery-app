@@ -217,13 +217,17 @@ main.error section{
     max-width: 400px;
 }
 
+main.error h2{
+    color: red;
+}
+
 main.error p{
     font-weight: 700;
-    color: red;
     font-size: 1.2rem;
 }
 
-main.error button{
+main.error button,
+main.error a{
     color: white;
     background-color: black;
     padding: 5px 10px;
@@ -490,7 +494,7 @@ main span{
     margin-top: 20px;
 }
 
-main span::before{
+main > span::before{
     content: '';
     display: block;
     position: absolute;

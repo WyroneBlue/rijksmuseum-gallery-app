@@ -2,6 +2,7 @@ import { $ } from '../modules/helpers.js';
 import { fetchDetails } from '../modules/data.js';
 import { isFavorite, toggleFavorite } from '../modules/favorites.js';
 import { transitionPage } from '../modules/router.js';
+import { showError } from '../modules/error.js';
 
 const main = $('main');
 const dialog = $('dialog');
@@ -15,6 +16,11 @@ export const showDetails = async() => {
     // Get details from API
     const id = window.location.hash.split('/')[1];
     const { artObject: details } = await fetchDetails(id);
+
+    if(!details){
+        showError();
+        return;
+    }
 
     // Show details with transition
     setTimeout(() => {
